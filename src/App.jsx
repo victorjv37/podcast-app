@@ -1,11 +1,11 @@
 import './App.css'
-import PodcastCard from './components/PodcastCard'
+import PodcastCards from './components/PodcastCards'
 
 function App() {
 
   return (
     <>
-      <PodcastCard />
+      <PodcastCards />
     </>
   )
 }

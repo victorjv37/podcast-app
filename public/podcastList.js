@@ -14,11 +14,14 @@ import axios from "axios";
               image : data["im:image"][0].label
             })
           });
+          const setListInLocalStorage = () => localStorage.setItem('podcastList' , JSON.stringify(podcastList)) 
+          setListInLocalStorage()
+          setInterval(setListInLocalStorage, 1000*60*60*24)
         } catch (error) {
           console.error("Error al obtener datos de la API:", error);
         }
       }
-      fetchData()
+  fetchData()
       
       export default podcastList
 

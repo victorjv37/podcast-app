@@ -4,21 +4,26 @@ import podcastList from "../../public/podcastList";
 const PodcastCard = () => {
   const [podcastArray, setPodcastArray] = useState([]);
   const [loaded, setLoaded] = useState(false);
-
+  let storagedList = localStorage.getItem('podcastList')
+  
   useEffect(() => {
-      const fetchData = async () => {
+    const fetchData = async () => {
+      if (storagedList){
+        setPodcastArray(JSON.parse(storagedList))
+        setLoaded(true)
+      }else{
         try {
-            await new Promise(resolve => setTimeout(resolve,2000));
-            setPodcastArray(podcastList)
-            setLoaded(true)
+          await new Promise(resolve =>  setTimeout(resolve,500));
+          setPodcastArray(podcastList)
+          setLoaded(true)
         }catch(error){
-            console.log('Error bringing data to the component', error)
+          console.log('Error bringing data to the component', error)
         }
-    }
+      }
+      }
     fetchData()
   },[])
-
-
+  
   return (
     loaded ? (
     <div>
