@@ -11,7 +11,8 @@ import axios from "axios";
             podcastList.push({
               name :  data["im:name"].label,
               artist : data["im:artist"].label,
-              image : data["im:image"][0].label
+              image : data["im:image"][0].label,
+              id : data.id.attributes["im:id"]
             })
           });
           const setListInLocalStorage = () => localStorage.setItem('podcastList' , JSON.stringify(podcastList)) 
