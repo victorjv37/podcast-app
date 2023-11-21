@@ -1,12 +1,17 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-const filterContext = createContext();
+const PodcastListContext = createContext();
 
-export const FilterProvider = ({ children }) => {
-  const [filterText, setFilterText] = useState("");
-  return <FilterProvider value={{ filterText, setFilterText }}>{children}</FilterProvider>;
+export const PodcastListProvider = ({ children }) => {
+  const [podcastListFiltered, setPodcastListFiltered] = useState([]);
+
+  return (
+    <PodcastListContext.Provider value={{ podcastListFiltered, setPodcastListFiltered }}>
+      {children}
+    </PodcastListContext.Provider>
+  );
 };
 
-export const useFilter = () => {
-  return useContext(filterContext);
+export const usePodcastListContext = () => {
+  return useContext(PodcastListContext);
 };

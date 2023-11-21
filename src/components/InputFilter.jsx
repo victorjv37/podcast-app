@@ -1,11 +1,29 @@
 import { useState, useEffect } from "react";
-import { useFilter } from "../context/filterContext";
+import { usePodcastListContext } from "../context/filterContext";
 import podcastList from "../services/podcastList";
-import PodcastCardsFiltered from "./PodcastCardsFiltered";
 
-const InputFilter = ({ setFiltered, filtered, podcastListFiltered }) => {
+const InputFilter = ({ setFiltered, filtered }) => {
+  debugger;
   const [error, setError] = useState(null);
-  const { filterText, setFilterText } = useFilter();
+  const [filterText, setFilterText] = useState("");
+  const { podcastListFiltered, setPodcastListFiltered } = usePodcastListContext();
+
+  useEffect(() => {
+    const podcastFilteredArray = podcastList.filter((element) => {
+      let elementName = element.name;
+      let authorName = element.artist;
+
+      if (filterText) {
+        if (
+          elementName.toLowerCase().includes(filterText.toLowerCase()) ||
+          authorName.toLowerCase().includes(filterText.toLowerCase())
+        ) {
+          return element;
+        }
+      }
+    });
+    setPodcastListFiltered(podcastFilteredArray);
+  }, [filterText]);
 
   useEffect(() => {
     if (podcastListFiltered) {
