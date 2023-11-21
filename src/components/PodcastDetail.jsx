@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import podcastDetail from '../../public/podcastDetail.js'
+import podcastDetail from "../services/podcastDetail";
 
 const PodcastDetail = () => {
+  const [podcastDetailList, setPodcastDetailList] = useState(null);
+  const [loaded, setLoaded] = useState(false);
 
-  const [podcastDetailList, setPodcastDetailList] = useState(null)
-  const [loaded, setLoaded] =  useState(false)
-  
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       if (podcastDetailList) {
         setPodcastDetailList(JSON.parse(podcastDetail));
         setLoaded(true);
@@ -20,19 +19,10 @@ const PodcastDetail = () => {
           console.log("Error bringing data to the component", error);
         }
       }
-    };
-    fetchData();
+    })();
   }, []);
-  
-    
-  
 
-  return (
-    <>
-    {loaded ? <div>Cargado???</div> : <div>nooo.....</div>
-    }
-    </>
-  )
-}
+  return <>{loaded ? <div>Cargado???</div> : <div>nooo.....</div>}</>;
+};
 
-export default PodcastDetail
+export default PodcastDetail;

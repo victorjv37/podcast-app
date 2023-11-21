@@ -1,11 +1,13 @@
-import InputFilters from "./InputFilters";
+import { FilterProvider } from "../context/filterContext";
+import InputFilter from "./InputFilter";
 
-const Header = ({setFiltered}) => {
-
+const Header = ({ setFiltered, filtered }) => {
   return (
-    <div>
-      <h2>podcastApp</h2>
-      <InputFilters setFiltered={setFiltered} />   
+    <div className="header">
+      <h2 className="title">Podcaster</h2>
+      <FilterProvider>
+        <InputFilter setFiltered={setFiltered} filtered={filtered} />
+      </FilterProvider>
     </div>
   );
 };

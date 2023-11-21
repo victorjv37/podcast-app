@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import podcastList from "../../public/podcastList";
+import podcastList from "../services/podcastList";
 
-const PodcastCard = () => {
+const Home = () => {
   const [podcastArray, setPodcastArray] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   let storagedList = localStorage.getItem("podcastList");
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       if (storagedList) {
         setPodcastArray(JSON.parse(storagedList));
         setLoaded(true);
@@ -22,17 +22,16 @@ const PodcastCard = () => {
           console.log("Error bringing data to the component", error);
         }
       }
-    };
-    fetchData();
+    })();
   }, [storagedList]);
 
   const handleClick = (index) => {
     const elementFiltered = podcastArray.filter((element, i) => i === index);
-    localStorage.setItem("podcastId", JSON.stringify((elementFiltered[0].id)))
+    localStorage.setItem("podcastId", JSON.stringify(elementFiltered[0].id));
   };
 
   return (
-    <div>
+    <div className="card">
       {loaded ? (
         <>
           <ul>
@@ -54,4 +53,4 @@ const PodcastCard = () => {
   );
 };
 
-export default PodcastCard;
+export default Home;
