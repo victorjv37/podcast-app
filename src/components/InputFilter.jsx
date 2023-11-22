@@ -1,19 +1,18 @@
 import ListCounter from "./ListCounter";
-import PodcastCardsFiltered from "./PodcastCardsFiltered";
 
-const InputFilter = ({ setFiltered, filtered, setFilterText }) => {
+const InputFilter = ({ setFiltered, setFilterText }) => {
   const handleFilterChange = (event) => {
     setFilterText(event.target.value);
-    setFiltered(true);
     if (event.target.value === "") {
       setFiltered(false);
+    } else {
+      setFiltered(true);
     }
   };
 
   return (
     <>
       <input type="text" placeholder="Search podcast" onChange={handleFilterChange} />
-      <ListCounter filtered={filtered} />
     </>
   );
 };

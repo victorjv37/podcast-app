@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import podcastList from "../services/podcastList";
-import InputFilter from "./InputFilter";
 
-const PodcastCardsFiltered = () => {
-  const [error, setError] = useState(null);
-  const [podcastListFiltered, setPodcastListFiltered] = useState("");
-  const [visible, setVisible] = useState(false);
-  const [filterText, setFilterText] = useState("");
-
+const PodcastCardsFiltered = ({
+  podcastListFiltered,
+  setPodcastListFiltered,
+  error,
+  setError,
+  filterText,
+  filtered
+}) => {
   useEffect(() => {
     const podcastFilteredArray = podcastList.filter((element) => {
       let elementName = element.name;
@@ -27,18 +28,18 @@ const PodcastCardsFiltered = () => {
   }, [filterText]);
 
   useEffect(() => {
-    if (podcastListFiltered) {
-      if (filterText && podcastListFiltered.length === 0) {
+    if (filtered) {
+      if (podcastListFiltered.length === 0) {
         setError(true);
-      } else {
+      } else if (podcastListFiltered.length !== 0) {
         setError(false);
       }
     }
-  }, [filterText]);
+  }, [filterText, podcastListFiltered]);
 
   return (
     <>
-      <div className={podcastListFiltered ? "card" : "hide"}>
+      <div className={error === true ? "hide" : "card"}>
         <ul>
           {podcastListFiltered &&
             podcastListFiltered.map((podcast, index) => (
@@ -52,7 +53,6 @@ const PodcastCardsFiltered = () => {
             ))}
         </ul>
       </div>
-      {visible && <InputFilter setFilterText={setFilterText} />}
     </>
   );
 };

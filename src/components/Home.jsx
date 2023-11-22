@@ -1,10 +1,20 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import InputFilter from "./InputFilter";
+import ListCounter from "./ListCounter";
+import PodcastCards from "./PodcastCards";
+import PodcastCardsFiltered from "./PodcastCardsFiltered";
+import Title from "./Title";
 import podcastList from "../services/podcastList";
+import { useState, useEffect } from "react";
 
 const Home = () => {
   const [podcastArray, setPodcastArray] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [filtered, setFiltered] = useState(false);
+  const [filterText, setFilterText] = useState("");
+  const [podcastListFiltered, setPodcastListFiltered] = useState("");
+  const [error, setError] = useState(null);
+
+  console.log("error", error, "filtered", filtered, "filtertext", filterText);
 
   let storagedList = localStorage.getItem("podcastList");
 
@@ -23,33 +33,35 @@ const Home = () => {
         }
       }
     })();
-  }, [storagedList]);
-
-  const handleClick = (index) => {
-    const elementFiltered = podcastArray.filter((element, i) => i === index);
-    localStorage.setItem("podcastId", JSON.stringify(elementFiltered[0].id));
-  };
+  }, [filterText]);
 
   return (
-    <div className="card">
-      {loaded ? (
-        <>
-          <ul>
-            {podcastArray.map((podcast, index) => (
-              <Link key={index} to={"/podcast"}>
-                <li key={index} onClick={() => handleClick(index)}>
-                  <h4>{podcast.name}</h4>
-                  <p>{podcast.artist}</p>
-                  <img src={podcast.image} alt={podcast.name} />
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </>
-      ) : (
-        <div>Loading...</div>
-      )}
-    </div>
+    <>
+      <header>
+        <Title />
+        <InputFilter setFilterText={setFilterText} setFiltered={setFiltered} />
+        <ListCounter
+          error={error}
+          podcastListFiltered={podcastListFiltered}
+          podcastArray={podcastArray}
+          filtered={filtered}
+        />
+      </header>
+      <div>
+        {filtered ? (
+          <PodcastCardsFiltered
+            filterText={filterText}
+            podcastListFiltered={podcastListFiltered}
+            setPodcastListFiltered={setPodcastListFiltered}
+            error={error}
+            setError={setError}
+            filtered={filtered}
+          />
+        ) : (
+          <PodcastCards podcastArray={podcastArray} loaded={loaded} />
+        )}
+      </div>
+    </>
   );
 };
 
