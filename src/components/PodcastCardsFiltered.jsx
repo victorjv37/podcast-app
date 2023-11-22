@@ -1,16 +1,40 @@
-import { useState } from "react";
-import { usePodcastListContext } from "../context/filterContext";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import podcastList from "../services/podcastList";
 import InputFilter from "./InputFilter";
 
 const PodcastCardsFiltered = () => {
-  const { podcastListFiltered } = usePodcastListContext();
+  const [error, setError] = useState(null);
+  const [podcastListFiltered, setPodcastListFiltered] = useState("");
   const [visible, setVisible] = useState(false);
+  const [filterText, setFilterText] = useState("");
 
-  // const handleClick = (index) => {
-  //   const elementFiltered = podcastListFiltered.filter((element, i) => i === index);
-  //   localStorage.setItem("podcastId", JSON.stringify(elementFiltered[0].id));
-  // };
+  useEffect(() => {
+    const podcastFilteredArray = podcastList.filter((element) => {
+      let elementName = element.name;
+      let authorName = element.artist;
+
+      if (filterText) {
+        if (
+          elementName.toLowerCase().includes(filterText.toLowerCase()) ||
+          authorName.toLowerCase().includes(filterText.toLowerCase())
+        ) {
+          return element;
+        }
+      }
+    });
+    setPodcastListFiltered(podcastFilteredArray);
+  }, [filterText]);
+
+  useEffect(() => {
+    if (podcastListFiltered) {
+      if (filterText && podcastListFiltered.length === 0) {
+        setError(true);
+      } else {
+        setError(false);
+      }
+    }
+  }, [filterText]);
 
   return (
     <>
@@ -19,7 +43,7 @@ const PodcastCardsFiltered = () => {
           {podcastListFiltered &&
             podcastListFiltered.map((podcast, index) => (
               <Link key={index} to={"/podcast"}>
-                <li key={index} onClick={() => handleClick(index)}>
+                <li key={index}>
                   <h4>{podcast.name}</h4>
                   <p>{podcast.artist}</p>
                   <img src={podcast.image} alt={podcast.name} />
@@ -28,7 +52,7 @@ const PodcastCardsFiltered = () => {
             ))}
         </ul>
       </div>
-      {visible && <InputFilter podcastListFiltered={podcastListFiltered} />}
+      {visible && <InputFilter setFilterText={setFilterText} />}
     </>
   );
 };

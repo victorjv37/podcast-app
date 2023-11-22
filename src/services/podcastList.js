@@ -25,3 +25,8 @@ const podcastList = [];
 })();
 
 export default podcastList;
+
+// const handleClick = (index) => {
+//   const elementFiltered = podcastListFiltered.filter((element, i) => i === index);
+//   localStorage.setItem("podcastId", JSON.stringify(elementFiltered[0].id));
+// };
