@@ -1,5 +1,3 @@
-import ListCounter from "./ListCounter";
-
 const InputFilter = ({ setFiltered, setFilterText }) => {
   const handleFilterChange = (event) => {
     setFilterText(event.target.value);
