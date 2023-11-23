@@ -1,22 +1,22 @@
 import { Link } from "react-router-dom";
 
-const PodcastCards = ({ podcastArray, loaded }) => {
+const PodcastCards = ({ allPodcasts, isLoaded }) => {
   const handleClick = (index) => {
-    const elementFiltered = podcastArray.filter((element, i) => i === index);
+    const elementFiltered = allPodcasts.filter((element, i) => i === index);
     localStorage.setItem("podcastId", JSON.stringify(elementFiltered[0].id));
   };
 
   return (
-    <div className="card">
-      {loaded ? (
+    <div>
+      {isLoaded ? (
         <>
           <ul>
-            {podcastArray.map((podcast, index) => (
-              <Link key={index} to={"/podcast"}>
+            {allPodcasts.map((podcast, index) => (
+              <Link className="card" key={index} to={"/podcast"}>
                 <li key={index} onClick={() => handleClick(index)}>
-                  <h4>{podcast.name}</h4>
-                  <p>{podcast.artist}</p>
                   <img src={podcast.image} alt={podcast.name} />
+                  <h4>{podcast.name}</h4>
+                  <p>Author:{podcast.artist}</p>
                 </li>
               </Link>
             ))}

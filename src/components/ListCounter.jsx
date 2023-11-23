@@ -1,16 +1,16 @@
 import React from "react";
 
-const ListCounter = ({ error, podcastListFilteredLength, podcastArrayLength, filtered }) => {
+const ListCounter = ({ error, filteredPodcastsLength, allPodcastsLength, isfiltered }) => {
   return (
     <>
-      {filtered ? (
+      {isfiltered ? (
         error ? (
-          <div>Unmatching Data...</div>
+          <div className="error">Unmatching Data...</div>
         ) : (
-          <div>{podcastListFilteredLength}</div>
+          <div>{filteredPodcastsLength}</div>
         )
       ) : (
-        <div>{podcastArrayLength}</div>
+        <div>{allPodcastsLength}</div>
       )}
     </>
   );

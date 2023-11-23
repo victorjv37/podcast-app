@@ -7,11 +7,11 @@ import podcastList from "../services/podcastList";
 import { useState, useEffect } from "react";
 
 const Home = () => {
-  const [podcastArray, setPodcastArray] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-  const [filtered, setFiltered] = useState(false);
+  const [allPodcasts, setAllPodcasts] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isFiltered, setIsFiltered] = useState(false);
   const [filterText, setFilterText] = useState("");
-  const [podcastListFiltered, setPodcastListFiltered] = useState("");
+  const [filteredPodcasts, setFilteredPodcasts] = useState("");
   const [error, setError] = useState(null);
 
   let storagedList = localStorage.getItem("podcastList");
@@ -19,15 +19,15 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       if (storagedList) {
-        setPodcastArray(JSON.parse(storagedList));
-        setPodcastListFiltered(JSON.parse(storagedList));
-        setLoaded(true);
+        setAllPodcasts(JSON.parse(storagedList));
+        setFilteredPodcasts(JSON.parse(storagedList));
+        setIsLoaded(true);
       } else {
         try {
           await new Promise((resolve) => setTimeout(resolve, 500));
-          setPodcastArray(podcastList);
-          setPodcastListFiltered(podcastList);
-          setLoaded(true);
+          setAllPodcasts(podcastList);
+          setFilteredPodcasts(podcastList);
+          setIsLoaded(true);
         } catch (error) {
           console.log("Error bringing data to the component", error);
         }
@@ -49,38 +49,40 @@ const Home = () => {
         }
       }
     });
-    setPodcastListFiltered(podcastFilteredArray);
+    setFilteredPodcasts(podcastFilteredArray);
   }, [filterText]);
 
   useEffect(() => {
-    if (filtered) {
-      if (podcastListFiltered.length === 0) {
+    if (isFiltered) {
+      if (filteredPodcasts.length === 0) {
         setError(true);
-      } else if (podcastListFiltered.length !== 0) {
+      } else if (filteredPodcasts.length !== 0) {
         setError(false);
       }
     }
-  }, [podcastListFiltered]);
+  }, [filteredPodcasts]);
 
   return (
     <>
-      <header>
+      <header className="header">
         <Title />
-        <InputFilter setFilterText={setFilterText} setFiltered={setFiltered} />
-        <ListCounter
-          error={error}
-          podcastListFilteredLength={podcastListFiltered.length}
-          podcastArrayLength={podcastArray.length}
-          filtered={filtered}
-        />
+        <div className="input-listcounter">
+          <ListCounter
+            error={error}
+            filteredPodcastsLength={filteredPodcasts.length}
+            allPodcastsLength={allPodcasts.length}
+            isfiltered={isFiltered}
+          />
+          <InputFilter setFilterText={setFilterText} setIsFiltered={setIsFiltered} />
+        </div>
       </header>
-      <div>
-        {filtered ? (
-          <PodcastCardsFiltered podcastListFiltered={podcastListFiltered} error={error} />
+      <>
+        {isFiltered ? (
+          <PodcastCardsFiltered filteredPodcasts={filteredPodcasts} />
         ) : (
-          <PodcastCards podcastArray={podcastArray} loaded={loaded} />
+          <PodcastCards allPodcasts={allPodcasts} isLoaded={isLoaded} />
         )}
-      </div>
+      </>
     </>
   );
 };
