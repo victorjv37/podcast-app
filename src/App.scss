@@ -125,3 +125,23 @@ align-items: center;
   top: 14vh;
   left: 11vh;
 }
+
+@media (min-width: 500px) {
+  .card {
+    width: 18vh;
+  }
+}
+@media (max-width: 256px) {
+  .input-listcounter {
+    flex-direction: column;
+    right: 7vh;
+  }
+  .card{
+    width: 10vh;
+  }
+}
+@media (max-width: 306px) {
+  .input-listcounter {
+    right: 7vh;
+  }
+}

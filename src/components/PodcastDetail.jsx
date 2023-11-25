@@ -1,28 +1,52 @@
 import { useEffect, useState } from "react";
-import podcastDetail from "../services/podcastDetail";
+import Title from "./Title";
+import PodcastData from "./PodcastData";
+import PodcastEpisodes from "./PodcastEpisodes";
+import PodcastEpisodesCounter from "./PodcastEpisodesCounter";
+import podcastEpisodes from "../services/podcastEpisodes";
 
 const PodcastDetail = () => {
-  const [podcastDetailList, setPodcastDetailList] = useState(null);
-  const [loaded, setLoaded] = useState(false);
+  const [episodesList, setEpisodesList] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  let storagedId = localStorage.getItem("podcastId");
+  let storagedEpisodes = localStorage.getItem(`podcastEpisodes${storagedId}`);
 
   useEffect(() => {
+    let podcastEpisodeList = JSON.stringify(podcastEpisodes);
     (async () => {
-      if (podcastDetailList) {
-        setPodcastDetailList(JSON.parse(podcastDetail));
-        setLoaded(true);
+      if (storagedEpisodes) {
+        setEpisodesList(JSON.parse(storagedEpisodes));
+        setIsLoaded(true);
       } else {
         try {
           await new Promise((resolve) => setTimeout(resolve, 500));
-          setPodcastDetailList(podcastDetail);
-          setLoaded(true);
+          setEpisodesList(JSON.parse(podcastEpisodeList));
+          setIsLoaded(true);
         } catch (error) {
           console.log("Error bringing data to the component", error);
         }
       }
+      console.log(storagedEpisodes);
     })();
   }, []);
 
-  return <>{loaded ? <div>Cargado???</div> : <div>nooo.....</div>}</>;
+  return (
+    <>
+      <header>
+        <Title />
+      </header>
+      <main>
+        <div>
+          <PodcastData />
+        </div>
+        <div>
+          <PodcastEpisodesCounter />
+          <PodcastEpisodes episodesList={episodesList} />
+        </div>
+      </main>
+    </>
+  );
 };
 
 export default PodcastDetail;
