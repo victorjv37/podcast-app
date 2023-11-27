@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/podcast" element={<PodcastDetail />} />
+        <Route path="/podcast/:id" element={<PodcastDetail />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

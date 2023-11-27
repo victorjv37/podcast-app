@@ -1,18 +1,11 @@
 import axios from "axios";
+import { useParams } from "react-router";
 
-const podcastEpisodes = [];
-(async () => {
-  const podcastIdList = [];
-  let storagedNotParsedId = localStorage.getItem("podcastId");
-  let storagedId = JSON.parse(storagedNotParsedId);
-  if (storagedId) {
-    if (!podcastIdList.includes(storagedId)) {
-      podcastIdList.push(storagedId);
-    }
-  }
+const getPodcastEpisodes = async (id) => {
+  const podcastEpisodes = [];
   try {
     const response = await axios.get(
-      `https://itunes.apple.com/lookup?id=${storagedId}&media=podcast&entity=podcastEpisode&limit=201`
+      `https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode&limit=201`
     );
     const results = response.data.results;
     const formatTime = (value) => {
@@ -32,13 +25,15 @@ const podcastEpisodes = [];
         duration: formattedDuration
       });
     });
-    const setListInLocalStorage = () =>
-      localStorage.setItem(`podcastEpisodes${storagedId}`, JSON.stringify(podcastEpisodes));
-    setListInLocalStorage();
+    const setListInLocalStorage = (id) =>
+      localStorage.setItem(`podcastEpisodes${id}`, JSON.stringify(podcastEpisodes));
+    setListInLocalStorage(id);
     setInterval(setListInLocalStorage, 1000 * 60 * 60 * 24);
+    return podcastEpisodes;
   } catch (error) {
     console.error("Error fetching data from the API:", error);
+    return [];
   }
-})();
+};
 
-export default podcastEpisodes;
+export default getPodcastEpisodes;

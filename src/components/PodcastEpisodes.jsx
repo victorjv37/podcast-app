@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const PodcastEpisodes = ({ episodesList }) => {
+const PodcastEpisodes = ({ episodesList, isLoaded }) => {
   const [ordenatedEpList, setOrdenatedEpList] = useState(null);
 
   useEffect(() => {
@@ -12,16 +12,32 @@ const PodcastEpisodes = ({ episodesList }) => {
 
   return (
     <>
-      {ordenatedEpList && (
-        <ul>
-          {ordenatedEpList.map((episode, index) => (
-            <li key={index}>
-              <p>{episode.title}</p>
-              <p>{episode.releaseDate}</p>
-              <p>{episode.duration}</p>
-            </li>
-          ))}
-        </ul>
+      {isLoaded ? (
+        ordenatedEpList && (
+          <div className="tableContainer">
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Date</th>
+                  <th>Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ordenatedEpList.map((episode, index) => (
+                  <tr key={index}>
+                    <td>{episode.title}</td>
+                    <td>{episode.releaseDate}</td>
+                    <td>{episode.duration}</td>
+                  </tr>
+                ))}
+              </tbody>
+               
+            </table>
+          </div>
+        )
+      ) : (
+        <div>Loading...</div>
       )}
     </>
   );

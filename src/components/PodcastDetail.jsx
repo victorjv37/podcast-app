@@ -3,33 +3,36 @@ import Title from "./Title";
 import PodcastData from "./PodcastData";
 import PodcastEpisodes from "./PodcastEpisodes";
 import PodcastEpisodesCounter from "./PodcastEpisodesCounter";
-import podcastEpisodes from "../services/podcastEpisodes";
+import getPodcastEpisodes from "../services/podcastEpisodes";
 
 const PodcastDetail = () => {
   const [episodesList, setEpisodesList] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [episodeCounter, setEpisodeCounter] = useState(undefined);
 
-  let storagedId = localStorage.getItem("podcastId");
-  let storagedEpisodes = localStorage.getItem(`podcastEpisodes${storagedId}`);
+  const pathname = window.location.pathname;
+  const id = pathname.slice(9, pathname.length);
 
   useEffect(() => {
-    let podcastEpisodeList = JSON.stringify(podcastEpisodes);
     (async () => {
-      if (storagedEpisodes) {
-        setEpisodesList(JSON.parse(storagedEpisodes));
-        setIsLoaded(true);
-      } else {
-        try {
-          await new Promise((resolve) => setTimeout(resolve, 500));
-          setEpisodesList(JSON.parse(podcastEpisodeList));
-          setIsLoaded(true);
-        } catch (error) {
-          console.log("Error bringing data to the component", error);
+      try {
+        let storagedEpisodes = localStorage.getItem(`podcastEpisodes${id}`);
+
+        if (storagedEpisodes) {
+          setEpisodesList(JSON.parse(storagedEpisodes));
+          setEpisodeCounter(JSON.parse(storagedEpisodes).length);
+        } else {
+          const episodes = await getPodcastEpisodes(id);
+          setEpisodesList(episodes);
+          setEpisodeCounter(episodes.length);
+          localStorage.setItem(`podcastEpisodes${id}`, JSON.stringify(episodes));
         }
+        setIsLoaded(true);
+      } catch (error) {
+        console.log("Error bringing data to the component", error);
       }
-      console.log(storagedEpisodes);
     })();
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -38,11 +41,11 @@ const PodcastDetail = () => {
       </header>
       <main>
         <div>
-          <PodcastData />
+          <PodcastData id={id} />
         </div>
-        <div>
-          <PodcastEpisodesCounter />
-          <PodcastEpisodes episodesList={episodesList} />
+        <div className="listcounterEpisodes">
+          <PodcastEpisodesCounter episodeCounter={episodeCounter} />
+          <PodcastEpisodes episodesList={episodesList} isLoaded={isLoaded} />
         </div>
       </main>
     </>

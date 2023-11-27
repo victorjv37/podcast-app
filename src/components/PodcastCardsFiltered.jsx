@@ -9,7 +9,7 @@ const PodcastCardsFiltered = ({ filteredPodcasts }) => {
             <Link
               className={filteredPodcasts.length === 1 ? "onlychild" : "card"}
               key={index}
-              to={"/podcast"}
+              to={`podcast/${podcast.id}`}
             >
               <li key={index}>
                 <img src={podcast.image} alt={podcast.name} />
