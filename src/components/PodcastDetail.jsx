@@ -1,28 +1,60 @@
 import { useEffect, useState } from "react";
-import podcastDetail from "../services/podcastDetail";
+import getPodcastEpisodes from "../services/podcastEpisodes";
+import Title from "./Title";
+import PodcastData from "./PodcastData";
+import PodcastEpisodes from "./PodcastEpisodes";
+import PodcastEpisodesCounter from "./PodcastEpisodesCounter";
 
 const PodcastDetail = () => {
-  const [podcastDetailList, setPodcastDetailList] = useState(null);
-  const [loaded, setLoaded] = useState(false);
+  const [episodesList, setEpisodesList] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [episodesCounter, setEpisodesCounter] = useState("");
+
+  const pathname = window.location.pathname;
+  const id = pathname.slice(9, 19);
 
   useEffect(() => {
     (async () => {
-      if (podcastDetailList) {
-        setPodcastDetailList(JSON.parse(podcastDetail));
-        setLoaded(true);
-      } else {
-        try {
-          await new Promise((resolve) => setTimeout(resolve, 500));
-          setPodcastDetailList(podcastDetail);
-          setLoaded(true);
-        } catch (error) {
-          console.log("Error bringing data to the component", error);
+      try {
+        let storagedEpisodes = localStorage.getItem(`podcastEpisodes${id}`);
+
+        if (storagedEpisodes) {
+          setEpisodesList(JSON.parse(storagedEpisodes));
+        } else {
+          const episodes = await getPodcastEpisodes(id);
+          setEpisodesList(episodes);
+          localStorage.setItem(`podcastEpisodes${id}`, JSON.stringify(episodes));
         }
+        setIsLoaded(true);
+      } catch (error) {
+        console.log("Error bringing data to the component", error);
       }
     })();
-  }, []);
+  }, [id]);
+  useEffect(() => {
+    if (episodesList) {
+      setEpisodesCounter(episodesList.length);
+    }
+  }, [episodesList]);
 
-  return <>{loaded ? <div>Cargado???</div> : <div>nooo.....</div>}</>;
+  return (
+    <>
+      <header className="detailHeader">
+        <div className="detailTitle">
+          <Title />
+        </div>
+      </header>
+      <main>
+        <div>
+          <PodcastData id={id} />
+        </div>
+        <div className="listcounterEpisodes">
+          <PodcastEpisodesCounter episodeCounter={episodesCounter} />
+          <PodcastEpisodes id={id} episodesList={episodesList} isLoaded={isLoaded} />
+        </div>
+      </main>
+    </>
+  );
 };
 
 export default PodcastDetail;

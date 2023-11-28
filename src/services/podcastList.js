@@ -12,7 +12,8 @@ const podcastList = [];
         name: data["im:name"].label,
         artist: data["im:artist"].label,
         image: data["im:image"][0].label,
-        id: data.id.attributes["im:id"]
+        id: data.id.attributes["im:id"],
+        description: data.summary
       });
     });
     const setListInLocalStorage = () =>

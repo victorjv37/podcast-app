@@ -64,8 +64,10 @@ const Home = () => {
 
   return (
     <>
-      <header className="header">
-        <Title />
+      <header className="homeHeader">
+        <div className="homeTitle">
+          <Title />
+        </div>
         <div className="input-listcounter">
           <ListCounter
             error={error}
