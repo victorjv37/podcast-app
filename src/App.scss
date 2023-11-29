@@ -196,21 +196,6 @@ tr:nth-child(even){
 .listcounterEpisodes{
 padding: 2vh;
 }
-.podcastData {
-  display: flex;
-  width: 90%;
-  flex-direction: row;
-  margin-top: 5%;
-  margin-left: 2vh;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  border-radius: 6px;
-}
-.podcastData > img{
-  padding: 2vh;
-  border-radius: 24px;
-  height: 18vh;
-  width: 17vh;
-}
 .counter{
   padding: 1.5vh;
   font-size: 2vh;
@@ -221,25 +206,42 @@ padding: 2vh;
 .podcastTitleDescription{
   display: flex;
   flex-direction: column;
-  font-size: 1.30vh;
-  padding: 1vh;
+  font-size: 1.5vh;
   padding-top: 2vh;
   padding-bottom: 2vh;
   align-items: flex-start;
   width: 18vh;
 }
-.podcastTitleDescription > p{
-  text-align: start;
-  display: flex;
-  flex-direction: column;
-  padding: 0px;
-  width: 100%;
-  color: $terciary-color;
-  word-wrap: break-word;
+.podcastData {
+  padding: 2vh;
+  width: 82%;
+  margin-top: 5%;
+  margin-left: 2vh;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
 }
-.podcastTitleDescription > h4{
-  font-size: 1.35vh;
-  margin-bottom: 0.4vh;
+.podcastData > img{
+  margin-right: 2vh;
+  border-radius: 8px;
+  height: 18vh;
+  width: 17vh;
+  float: left;
+}
+.podcastData > p {
+  display: contents;
+  color: $terciary-color;
+  font-size: 1.6vh;
+}
+#shorterP {
+  display: flex;
+  text-align: start;
+  padding-left: 0px;
+}
+.podcastData > h4{
+  font-size: 1.7vh;
+}
+#description {
+  padding-top: 2vh;
 }
 .episodeDataContainer {
   font-size: 2vh;
@@ -262,9 +264,8 @@ padding: 2vh;
 }
 audio {
   padding: 2vh;
-}
-source {
-padding: 0.5vh;
+  padding-left: 0vh;
+  width: 100%;
 }
 
 
