@@ -1,13 +1,13 @@
+import AudioPlayer from "./AudioPlayer";
+
 const EpisodeData = ({ podcastFound }) => {
   return (
     <>
       {podcastFound && (
-        <div>
+        <div className="episodeData">
           <h4>{podcastFound[0].title}</h4>
-          <p>{podcastFound[0].episodeDescription}</p>
-          <audio controls>
-            <source src={podcastFound[0].episodeUrl} type="audio/mp3" />
-          </audio>
+          <p id="episodeP">{podcastFound[0].episodeDescription}</p>
+          <AudioPlayer audioSrc={podcastFound[0].episodeUrl} />
         </div>
       )}
     </>

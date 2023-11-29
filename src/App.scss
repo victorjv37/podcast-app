@@ -1,4 +1,4 @@
-$primary-color: #ffffffea;
+$primary-color: #f7f2f2ea;
 $secondary-color: #2e6bcc;
 $terciary-color: rgb(92, 91, 91);
 
@@ -26,6 +26,7 @@ li> p{
 }
 a {
   text-decoration: none;
+  color: $secondary-color;
 }
 ul {
   display: flex;
@@ -44,6 +45,9 @@ li {
 img {
   border-radius: 100%;
   width: 50%;
+}
+p {
+  word-wrap: break-word;
 }
 .hide {
   display: none;
@@ -156,7 +160,9 @@ tr{
   border: none
 }
 td:nth-child(1){
-  color: $secondary-color;
+  link{
+    color: $secondary-color;
+  }
 }
 td:nth-child(2){
   width: 25%;
@@ -202,8 +208,8 @@ padding: 2vh;
 .podcastData > img{
   padding: 2vh;
   border-radius: 24px;
-  max-height: 18vh;
-  max-width: 18vh;
+  height: 18vh;
+  width: 17vh;
 }
 .counter{
   padding: 1.5vh;
@@ -220,22 +226,92 @@ padding: 2vh;
   padding-top: 2vh;
   padding-bottom: 2vh;
   align-items: flex-start;
-  width: 58%;
+  width: 18vh;
 }
 .podcastTitleDescription > p{
   text-align: start;
+  display: flex;
+  flex-direction: column;
   padding: 0px;
   width: 100%;
   color: $terciary-color;
+  word-wrap: break-word;
 }
 .podcastTitleDescription > h4{
   font-size: 1.35vh;
   margin-bottom: 0.4vh;
 }
+.episodeDataContainer {
+  font-size: 2vh;
+  margin-bottom: 0.5vh;
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  margin-top: 5%;
+  margin-left: 2vh;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+}
+.episodeData {
+  padding: 1.5vh;
+}
+#episodeP {
+  padding-top: 1vh;
+  padding-left: 0vh;
+  text-align: left;
+}
+audio {
+  padding: 2vh;
+}
+source {
+padding: 0.5vh;
+}
+
+
+
 
 @media (min-width: 500px) {
   .card {
     width: 18vh;
+  }
+}
+@media (min-width: 650px) {
+  .podcastData {
+    display: flex;
+    align-items: center;
+    width: 35vh;
+    height: 50%;
+    flex-direction: column;
+    margin-top: 3%;
+    margin-left: 6vh;
+  }
+  .tableContainer{
+    max-height: 85vh;
+    width: 100%;
+  }
+  .episodeDataContainer{
+    margin-top: 3%;
+  }
+  main{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  }
+  .listcounterEpisodes{
+    padding: 5%;
+    height: 90%;
+    width: 100%;
+    margin-top: -2%;
+  }
+  .episodeDataContainer {
+    justify-content: center;
+  }
+  .episodeData {
+    justify-content: center;
+  }
+  audio{
+    padding-left: 0px;
   }
 }
 @media (max-width: 256px) {

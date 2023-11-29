@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import podcastList from "../services/podcastList.js";
 
-const PodcastData = ({ id, podcastId }) => {
+const PodcastData = ({ id, podcastId, storagedList }) => {
   const [podcastFound, setPodcastFound] = useState("");
+
   useEffect(() => {
-    const podcast = podcastList.find((podcast) => podcast.id === id || podcast.id === podcastId);
+    const podcast = storagedList.find((podcast) => podcast.id === id || podcast.id === podcastId);
     setPodcastFound(podcast);
-  }, [id, podcastId, podcastList]);
+  }, [id, podcastId]);
 
   return (
     <>

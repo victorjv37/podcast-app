@@ -10,6 +10,8 @@ const PodcastDetail = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [episodesCounter, setEpisodesCounter] = useState("");
 
+  let notParsedLi = localStorage.getItem("podcastList");
+  let storagedList = JSON.parse(notParsedLi);
   const pathname = window.location.pathname;
   const id = pathname.slice(9, 19);
 
@@ -31,6 +33,7 @@ const PodcastDetail = () => {
       }
     })();
   }, [id]);
+
   useEffect(() => {
     if (episodesList) {
       setEpisodesCounter(episodesList.length);
@@ -45,9 +48,7 @@ const PodcastDetail = () => {
         </div>
       </header>
       <main>
-        <div>
-          <PodcastData id={id} />
-        </div>
+        <PodcastData id={id} storagedList={storagedList} />
         <div className="listcounterEpisodes">
           <PodcastEpisodesCounter episodeCounter={episodesCounter} />
           <PodcastEpisodes id={id} episodesList={episodesList} isLoaded={isLoaded} />
