@@ -1,30 +1,26 @@
-import Title from "./Title";
-import PodcastData from "./PodcastData";
-import EpisodeData from "./EpisodeData";
+import Title from "../components/Title";
+import PodcastData from "../components/PodcastData";
+import EpisodeData from "../components/EpisodeData";
 import { useEffect, useState } from "react";
 
 const Episode = () => {
-  const [podcastFound, setPodcastFound] = useState("");
+  const [podcastEpisode, setPodcastEpisode] = useState("");
 
-  let notParsedLi = localStorage.getItem("podcastList");
-  let storagedList = JSON.parse(notParsedLi);
   const pathname = window.location.pathname;
   const podcastId = pathname.slice(9, 19);
   const episodeId = pathname.slice(28, pathname.length);
+
+  let notParsedLi = localStorage.getItem("podcastList");
+  let storagedList = JSON.parse(notParsedLi);
 
   useEffect(() => {
     let storagedNotParsedEpisodes = localStorage.getItem(`podcastEpisodes${podcastId}`);
     let storagedEpisodes = JSON.parse(storagedNotParsedEpisodes);
     if (storagedEpisodes) {
-      const podcastFiltered = storagedEpisodes.filter((element, index) => {
-        if (episodeId == index) {
-          return element;
-        }
-      });
-      setPodcastFound(podcastFiltered);
+      const podcastFound = storagedEpisodes.find((element, index) => episodeId == index);
+      setPodcastEpisode(podcastFound);
     }
   }, [podcastId]);
-
   return (
     <>
       <header className="detailHeader">
@@ -35,7 +31,7 @@ const Episode = () => {
       <main>
         <PodcastData storagedList={storagedList} podcastId={podcastId} />
         <div className="episodeDataContainer">
-          <EpisodeData podcastFound={podcastFound} />
+          <EpisodeData podcastEpisode={podcastEpisode} />
         </div>
       </main>
     </>

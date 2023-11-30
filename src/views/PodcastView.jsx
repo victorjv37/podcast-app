@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import getPodcastEpisodes from "../services/podcastEpisodes";
-import Title from "./Title";
-import PodcastData from "./PodcastData";
-import PodcastEpisodes from "./PodcastEpisodes";
-import PodcastEpisodesCounter from "./PodcastEpisodesCounter";
+import Title from "../components/Title";
+import PodcastData from "../components/PodcastData";
+import PodcastEpisodes from "../components/PodcastEpisodes";
+import PodcastEpisodesCounter from "../components/PodcastEpisodesCounter";
 
 const PodcastDetail = () => {
   const [episodesList, setEpisodesList] = useState(null);

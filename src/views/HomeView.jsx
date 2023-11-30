@@ -1,8 +1,8 @@
-import InputFilter from "./InputFilter";
-import ListCounter from "./ListCounter";
-import PodcastCards from "./PodcastCards";
-import PodcastCardsFiltered from "./PodcastCardsFiltered";
-import Title from "./Title";
+import InputFilter from "../components/InputFilter";
+import ListCounter from "../components/ListCounter";
+import PodcastCards from "../components/PodcastCards";
+import PodcastCardsFiltered from "../components/PodcastCardsFiltered";
+import Title from "../components/Title";
 import podcastList from "../services/podcastList";
 import { useState, useEffect } from "react";
 

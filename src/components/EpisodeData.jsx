@@ -1,13 +1,13 @@
 import AudioPlayer from "./AudioPlayer";
 
-const EpisodeData = ({ podcastFound }) => {
+const EpisodeData = ({ podcastEpisode }) => {
   return (
     <>
-      {podcastFound && (
+      {podcastEpisode && (
         <div className="episodeData">
-          <h4>{podcastFound[0].title}</h4>
-          <p id="episodeP">{podcastFound[0].episodeDescription}</p>
-          <AudioPlayer audioSrc={podcastFound[0].episodeUrl} />
+          <h4>{podcastEpisode.title}</h4>
+          <p id="episodeP">{podcastEpisode.episodeDescription}</p>
+          <AudioPlayer audioSrc={podcastEpisode.episodeUrl} />
         </div>
       )}
     </>
