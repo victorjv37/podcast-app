@@ -5,40 +5,50 @@ import PodcastData from "../components/PodcastData";
 import PodcastEpisodes from "../components/PodcastEpisodes";
 import PodcastEpisodesCounter from "../components/PodcastEpisodesCounter";
 
-const PodcastDetail = () => {
+const PodcastView = () => {
   const [episodesList, setEpisodesList] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [episodesCounter, setEpisodesCounter] = useState("");
+  const [description, setDescription] = useState("");
 
   let notParsedLi = localStorage.getItem("podcastList");
   let storagedList = JSON.parse(notParsedLi);
+
   const pathname = window.location.pathname;
-  const id = pathname.slice(9, 19);
+  const podcastIdMatch = pathname.match(/\/podcast\/(\d+)/);
+  const id = podcastIdMatch[1];
 
   useEffect(() => {
-    (async () => {
+    const fetchData = async () => {
       try {
         let storagedEpisodes = localStorage.getItem(`podcastEpisodes${id}`);
 
         if (storagedEpisodes) {
-          setEpisodesList(JSON.parse(storagedEpisodes));
+          const parsedEpisodes = JSON.parse(storagedEpisodes);
+          setEpisodesList(parsedEpisodes);
+          const lastEpisode = parsedEpisodes[parsedEpisodes.length - 1];
+
+          if (lastEpisode) {
+            const lastEpisodeDescription = lastEpisode.description;
+            setDescription(lastEpisodeDescription);
+          }
         } else {
           const episodes = await getPodcastEpisodes(id);
-          setEpisodesList(episodes);
-          localStorage.setItem(`podcastEpisodes${id}`, JSON.stringify(episodes));
+
+          if (episodes && episodes.length > 0) {
+            setEpisodesList(episodes);
+            const lastEpisodeDescription = episodes[episodes.length - 1].description;
+            setDescription(lastEpisodeDescription);
+            localStorage.setItem(`podcastEpisodes${id}`, JSON.stringify(episodes));
+          }
         }
         setIsLoaded(true);
       } catch (error) {
-        console.log("Error bringing data to the component", error);
+        console.error("Error fetching or setting data:", error);
       }
-    })();
+    };
+    fetchData();
   }, [id]);
-
-  useEffect(() => {
-    if (episodesList) {
-      setEpisodesCounter(episodesList.length);
-    }
-  }, [episodesList]);
 
   return (
     <>
@@ -48,7 +58,7 @@ const PodcastDetail = () => {
         </div>
       </header>
       <main>
-        <PodcastData id={id} storagedList={storagedList} />
+        <PodcastData id={id} storagedList={storagedList} description={description} />
         <div className="listcounterEpisodes">
           <PodcastEpisodesCounter episodeCounter={episodesCounter} />
           <PodcastEpisodes id={id} episodesList={episodesList} isLoaded={isLoaded} />
@@ -58,4 +68,4 @@ const PodcastDetail = () => {
   );
 };
 
-export default PodcastDetail;
+export default PodcastView;

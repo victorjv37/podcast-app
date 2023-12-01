@@ -3,12 +3,14 @@ import PodcastData from "../components/PodcastData";
 import EpisodeData from "../components/EpisodeData";
 import { useEffect, useState } from "react";
 
-const Episode = () => {
+const EpisodeView = () => {
   const [podcastEpisode, setPodcastEpisode] = useState("");
+  const [description, setDescription] = useState("");
 
   const pathname = window.location.pathname;
-  const podcastId = pathname.slice(9, 19);
-  const episodeId = pathname.slice(28, pathname.length);
+  const podcastIdMatch = pathname.match(/\/podcast\/(\d+)\/episode\/(\d+)/);
+  const podcastId = podcastIdMatch[1];
+  const episodeId = podcastIdMatch[2];
 
   let notParsedLi = localStorage.getItem("podcastList");
   let storagedList = JSON.parse(notParsedLi);
@@ -16,11 +18,15 @@ const Episode = () => {
   useEffect(() => {
     let storagedNotParsedEpisodes = localStorage.getItem(`podcastEpisodes${podcastId}`);
     let storagedEpisodes = JSON.parse(storagedNotParsedEpisodes);
-    if (storagedEpisodes) {
-      const podcastFound = storagedEpisodes.find((element, index) => episodeId == index);
+
+    if (storagedEpisodes && episodeId >= 0 && episodeId < storagedEpisodes.length) {
+      const podcastFound = storagedEpisodes[episodeId];
+      const podcastDescription = storagedEpisodes[storagedEpisodes.length - 1].description;
       setPodcastEpisode(podcastFound);
+      setDescription(podcastDescription);
     }
-  }, [podcastId]);
+  }, [podcastId, episodeId]);
+
   return (
     <>
       <header className="detailHeader">
@@ -29,7 +35,7 @@ const Episode = () => {
         </div>
       </header>
       <main>
-        <PodcastData storagedList={storagedList} podcastId={podcastId} />
+        <PodcastData storagedList={storagedList} podcastId={podcastId} description={description} />
         <div className="episodeDataContainer">
           <EpisodeData podcastEpisode={podcastEpisode} />
         </div>
@@ -38,4 +44,4 @@ const Episode = () => {
   );
 };
 
-export default Episode;
+export default EpisodeView;

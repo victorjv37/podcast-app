@@ -6,17 +6,17 @@ const PodcastCardsFiltered = ({ filteredPodcasts }) => {
       <ul>
         {filteredPodcasts &&
           filteredPodcasts.map((podcast, index) => (
-            <Link
-              className={filteredPodcasts.length === 1 ? "onlychild" : "card"}
-              key={index}
-              to={`/podcast/${podcast.id}`}
-            >
-              <li key={index}>
+            <li key={index}>
+              <Link
+                className={filteredPodcasts.length === 1 ? "onlychild" : "card"}
+                key={index}
+                to={`/podcast/${podcast.id}`}
+              >
                 <img src={podcast.image} alt={podcast.name} />
                 <h4>{podcast.name}</h4>
                 <p>{podcast.artist}</p>
-              </li>
-            </Link>
+              </Link>
+            </li>
           ))}
       </ul>
     </>

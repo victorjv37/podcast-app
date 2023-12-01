@@ -1,9 +1,9 @@
-import "./App.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
 import HomeView from "./views/HomeView";
 
 const App = () => {
   return (
-    <div className="home-container">
+    <div className="container">
       <HomeView />
     </div>
   );

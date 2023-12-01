@@ -1,331 +1,340 @@
-$primary-color: #f7f2f2ea;
-$secondary-color: #2e6bcc;
-$terciary-color: rgb(92, 91, 91);
+/* make the customizations */
+$theme-colors: (
+    "info": tomato,
+    "danger": teal
+);
 
-body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: $primary-color;
-  color: $secondary-color;
-}
-h4,div,p {
-  color: black;
-  margin: 0px;
-}
-li > h4,p{
-  display: flex;
-  text-align: center;
-  padding-left: 6px;
-  padding-right: 6px;
-}
-li> p{
-  margin-top: 5px;
-  margin-bottom: 8px;
-  color: $terciary-color
-}
-a {
-  text-decoration: none;
-  color: $secondary-color;
-}
-ul {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-}
-li {
-  list-style: none;
-  margin: 0px;
-  height: 100%;
-  width: 100%;
-  padding-left: 1px;
-  padding-right: 1px;
-}
-img {
-  border-radius: 100%;
-  width: 50%;
-}
-p {
-  word-wrap: break-word;
-}
-.hide {
-  display: none;
-}
-.title{
-  color: $secondary-color;
-  font-weight: bold;
-}
-.homeTitle{
-  position: relative;
-  left: 4%;
-  bottom: 2vh;
-}
-.homeHeader {
- display: flex;
- flex-direction: row;
- justify-content: space-between;
- align-items: center;
- width: 100%;
- height: 9vh;
-}
+/*import bootstrap to set changes */
+@import "~bootstrap/scss/bootstrap";
 
-.input-listcounter{
-display: flex;
-flex-direction: row;
-position: relative;
-right: 8%;
-top: 32%;
-align-items: center;
-}
+// $primary-color: #f7f2f2ea;
+// $secondary-color: #2e6bcc;
+// $terciary-color: rgb(92, 91, 91);
 
-.input-listcounter > div {
-  margin-right: 10px;
-  background-color: #2e6bcc;
-  color: $primary-color;
-  font-weight: bold;
-  border-radius: 10px;
-  display: flex;
-  padding-left: 6px;
-  padding-right: 6px;
-  padding-top: 2.5px;
-  padding-bottom: 2.5px;
-  height: 100%;
-  align-items: center;
-}
+// body {
+//   font-family: 'Arial', sans-serif;
+//   margin: 0;
+//   padding: 0;
+//   background-color: $primary-color;
+//   color: $secondary-color;
+// }
+// h4,div,p {
+//   color: black;
+//   margin: 0px;
+// }
+// li > h4,p{
+//   display: flex;
+//   text-align: center;
+//   padding-left: 6px;
+//   padding-right: 6px;
+// }
+// li> p{
+//   margin-top: 5px;
+//   margin-bottom: 8px;
+//   color: $terciary-color
+// }
+// a {
+//   text-decoration: none;
+//   color: $secondary-color;
+// }
+// ul {
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   align-items: center;
+// }
+// li {
+//   list-style: none;
+//   margin: 0px;
+//   height: 100%;
+//   width: 100%;
+//   padding-left: 1px;
+//   padding-right: 1px;
+// }
+// img {
+//   border-radius: 100%;
+//   width: 50%;
+// }
+// p {
+//   word-wrap: break-word;
+// }
+// .hide {
+//   display: none;
+// }
+// .title{
+//   color: $secondary-color;
+//   font-weight: bold;
+// }
+// .homeTitle{
+//   position: relative;
+//   left: 4%;
+//   bottom: 2vh;
+// }
+// .homeHeader {
+//  display: flex;
+//  flex-direction: row;
+//  justify-content: space-between;
+//  align-items: center;
+//  width: 100%;
+//  height: 9vh;
+// }
 
-.input-listcounter > input {
-  border-color: $secondary-color;
-  border-radius: 4px;
-  border-width: 1px;
-  padding: 3%;
-}
+// .input-listcounter{
+// display: flex;
+// flex-direction: row;
+// position: relative;
+// right: 8%;
+// top: 32%;
+// align-items: center;
+// }
 
-.home-container, li {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+// .input-listcounter > div {
+//   margin-right: 10px;
+//   background-color: #2e6bcc;
+//   color: $primary-color;
+//   font-weight: bold;
+//   border-radius: 10px;
+//   display: flex;
+//   padding-left: 6px;
+//   padding-right: 6px;
+//   padding-top: 2.5px;
+//   padding-bottom: 2.5px;
+//   height: 100%;
+//   align-items: center;
+// }
 
-.card {
-  width: 40%;
-  margin: 10px;
-  border-radius: 2px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  font-size: smaller;
-}
-.onlychild {
-  width: 18vh;
-  margin: 20px;
-  border-radius: 2px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  font-size: smaller;
-}
+// .input-listcounter > input {
+//   border-color: $secondary-color;
+//   border-radius: 4px;
+//   border-width: 1px;
+//   padding: 3%;
+// }
 
-.filtered-card {
-  background-color: $secondary-color;
-  color: $primary-color;
-}
-.error{
-  position: relative;
-  top: 14vh;
-  left: 11vh;
-}
-// PODCASTDETAIL CLASSES
-main{
-display: flex;
-flex-direction: column;
-width: 100%;
-height: 100%;
-}
-table {
-  border-collapse: collapse;
-  border-radius: 100px;
-  width: 100%;
-  padding: 1vh;
-  font-size: 1.7vh;
-}
-th, td {
-  padding: 8px;
-  text-align: left;
-}
-th {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color: $primary-color;
-}
-tr{
-  border: none
-}
-td:nth-child(1){
-  link{
-    color: $secondary-color;
-  }
-}
-td:nth-child(2){
-  width: 25%;
-}
-td:nth-child(3){
-  width: 25%;
-}
-tr:nth-child(even){
-  background-color: rgba(67, 120, 172, 0.092);
-}
-.detailHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 3vh;
- }
-.detailTitle{
-  position: relative;
-  left: 4%;
-  top: 1vh;
-}
-.tableContainer{
-  position: relative;
-  max-height: 62vh;
-  overflow: auto;
-  box-shadow: 10px 0 10px -10px rgba(0, 0, 0, 0.5), -10px 0 10px -5px rgba(0,0,0,0.5);
-  border-radius: 6px;
-}
-.listcounterEpisodes{
-padding: 2vh;
-}
-.counter{
-  padding: 1.5vh;
-  font-size: 2vh;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  border-radius: 6px;
-  margin-bottom: 0.5vh;
-}
-.podcastTitleDescription{
-  display: flex;
-  flex-direction: column;
-  font-size: 1.5vh;
-  padding-top: 2vh;
-  padding-bottom: 2vh;
-  align-items: flex-start;
-  width: 18vh;
-}
-.podcastData {
-  padding: 2vh;
-  width: 82%;
-  margin-top: 5%;
-  margin-left: 2vh;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  border-radius: 6px;
-}
-.podcastData > img{
-  margin-right: 2vh;
-  border-radius: 8px;
-  height: 18vh;
-  width: 17vh;
-  float: left;
-}
-.podcastData > p {
-  display: contents;
-  color: $terciary-color;
-  font-size: 1.6vh;
-}
-#shorterP {
-  display: flex;
-  text-align: start;
-  padding-left: 0px;
-}
-.podcastData > h4{
-  font-size: 1.7vh;
-}
-#description {
-  padding-top: 2vh;
-}
-.episodeDataContainer {
-  font-size: 2vh;
-  margin-bottom: 0.5vh;
-  display: flex;
-  width: 90%;
-  flex-direction: column;
-  margin-top: 5%;
-  margin-left: 2vh;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  border-radius: 6px;
-}
-.episodeData {
-  padding: 1.5vh;
-}
-#episodeP {
-  padding-top: 1vh;
-  padding-left: 0vh;
-  text-align: left;
-}
-audio {
-  padding: 2vh;
-  padding-left: 0vh;
-  width: 100%;
-}
+// .home-container, li {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .card {
+//   width: 40%;
+//   margin: 10px;
+//   border-radius: 2px;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+//   font-size: smaller;
+// }
+// .onlychild {
+//   width: 18vh;
+//   margin: 20px;
+//   border-radius: 2px;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+//   font-size: smaller;
+// }
+
+// .filtered-card {
+//   background-color: $secondary-color;
+//   color: $primary-color;
+// }
+// .error{
+//   position: relative;
+//   top: 14vh;
+//   left: 11vh;
+// }
+// // PODCASTDETAIL CLASSES
+// main{
+// display: flex;
+// flex-direction: column;
+// width: 100%;
+// height: 100%;
+// }
+// table {
+//   border-collapse: collapse;
+//   border-radius: 100px;
+//   width: 100%;
+//   padding: 1vh;
+//   font-size: 1.7vh;
+// }
+// th, td {
+//   padding: 8px;
+//   text-align: left;
+// }
+// th {
+//   position: sticky;
+//   top: 0;
+//   z-index: 1;
+//   background-color: $primary-color;
+// }
+// tr{
+//   border: none
+// }
+// td:nth-child(1){
+//   link{
+//     color: $secondary-color;
+//   }
+// }
+// td:nth-child(2){
+//   width: 25%;
+// }
+// td:nth-child(3){
+//   width: 25%;
+// }
+// tr:nth-child(even){
+//   background-color: rgba(67, 120, 172, 0.092);
+// }
+// .detailHeader {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: center;
+//   width: 100%;
+//   height: 3vh;
+//  }
+// .detailTitle{
+//   position: relative;
+//   left: 4%;
+//   top: 1vh;
+// }
+// .tableContainer{
+//   position: relative;
+//   max-height: 62vh;
+//   overflow: auto;
+//   box-shadow: 10px 0 10px -10px rgba(0, 0, 0, 0.5), -10px 0 10px -5px rgba(0,0,0,0.5);
+//   border-radius: 6px;
+// }
+// .listcounterEpisodes{
+// padding: 2vh;
+// }
+// .counter{
+//   padding: 1.5vh;
+//   font-size: 2vh;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+//   border-radius: 6px;
+//   margin-bottom: 0.5vh;
+// }
+// .podcastTitleDescription{
+//   display: flex;
+//   flex-direction: column;
+//   font-size: 1.5vh;
+//   padding-top: 2vh;
+//   padding-bottom: 2vh;
+//   align-items: flex-start;
+//   width: 18vh;
+// }
+// .podcastData {
+//   padding: 2vh;
+//   width: 82%;
+//   margin-top: 5%;
+//   margin-left: 2vh;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+//   border-radius: 6px;
+// }
+// .podcastData > img{
+//   margin-right: 2vh;
+//   border-radius: 8px;
+//   height: 18vh;
+//   width: 17vh;
+//   float: left;
+// }
+// .podcastData > p {
+//   display: contents;
+//   color: $terciary-color;
+//   font-size: 1.6vh;
+// }
+// #shorterP {
+//   display: flex;
+//   text-align: start;
+//   padding-left: 0px;
+// }
+// .podcastData > h4{
+//   font-size: 1.7vh;
+// }
+// #description {
+//   padding-top: 2vh;
+// }
+// .episodeDataContainer {
+//   font-size: 2vh;
+//   margin-bottom: 0.5vh;
+//   display: flex;
+//   width: 90%;
+//   flex-direction: column;
+//   margin-top: 5%;
+//   margin-left: 2vh;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+//   border-radius: 6px;
+// }
+// .episodeData {
+//   padding: 1.5vh;
+// }
+// #episodeP {
+//   padding-top: 1vh;
+//   padding-left: 0vh;
+//   text-align: left;
+// }
+// audio {
+//   padding: 2vh;
+//   padding-left: 0vh;
+//   width: 100%;
+// }
 
 
 
 
-@media (min-width: 500px) {
-  .card {
-    width: 18vh;
-  }
-}
-@media (min-width: 650px) {
-  .podcastData {
-    display: flex;
-    align-items: center;
-    width: 35vh;
-    height: 50%;
-    flex-direction: column;
-    margin-top: 3%;
-    margin-left: 6vh;
-  }
-  .tableContainer{
-    max-height: 85vh;
-    width: 100%;
-  }
-  .episodeDataContainer{
-    margin-top: 3%;
-  }
-  main{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 100%;
-  }
-  .listcounterEpisodes{
-    padding: 5%;
-    height: 90%;
-    width: 100%;
-    margin-top: -2%;
-  }
-  .episodeDataContainer {
-    justify-content: center;
-  }
-  .episodeData {
-    justify-content: center;
-  }
-  audio{
-    padding-left: 0px;
-  }
-}
-@media (max-width: 256px) {
-  .input-listcounter {
-    flex-direction: column;
-    right: 7vh;
-  }
-  .card{
-    width: 10vh;
-  }
-}
-@media (max-width: 306px) {
-  .input-listcounter {
-    right: 7vh;
-  }
-}
+// @media (min-width: 500px) {
+//   .card {
+//     width: 18vh;
+//   }
+// }
+// @media (min-width: 650px) {
+//   .podcastData {
+//     display: flex;
+//     align-items: center;
+//     width: 35vh;
+//     height: 50%;
+//     flex-direction: column;
+//     margin-top: 3%;
+//     margin-left: 6vh;
+//   }
+//   .tableContainer{
+//     max-height: 85vh;
+//     width: 100%;
+//   }
+//   .episodeDataContainer{
+//     margin-top: 3%;
+//   }
+//   main{
+//   display: flex;
+//   flex-direction: row;
+//   width: 100%;
+//   height: 100%;
+//   }
+//   .listcounterEpisodes{
+//     padding: 5%;
+//     height: 90%;
+//     width: 100%;
+//     margin-top: -2%;
+//   }
+//   .episodeDataContainer {
+//     justify-content: center;
+//   }
+//   .episodeData {
+//     justify-content: center;
+//   }
+//   audio{
+//     padding-left: 0px;
+//   }
+// }
+// @media (max-width: 256px) {
+//   .input-listcounter {
+//     flex-direction: column;
+//     right: 7vh;
+//   }
+//   .card{
+//     width: 10vh;
+//   }
+// }
+// @media (max-width: 306px) {
+//   .input-listcounter {
+//     right: 7vh;
+//   }
+// }
