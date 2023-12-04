@@ -51,12 +51,8 @@ const PodcastView = () => {
   }, [id]);
 
   return (
-    <>
-      <header className="detailHeader">
-        <div className="detailTitle">
-          <Title />
-        </div>
-      </header>
+    <div className="container">
+      <Title />
       <main>
         <PodcastData id={id} storagedList={storagedList} description={description} />
         <div className="listcounterEpisodes">
@@ -64,7 +60,7 @@ const PodcastView = () => {
           <PodcastEpisodes id={id} episodesList={episodesList} isLoaded={isLoaded} />
         </div>
       </main>
-    </>
+    </div>
   );
 };
 

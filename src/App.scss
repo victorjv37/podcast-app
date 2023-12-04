@@ -1,27 +1,63 @@
-/* make the customizations */
-$theme-colors: (
-    "info": tomato,
-    "danger": teal
-);
 
-/*import bootstrap to set changes */
-@import "~bootstrap/scss/bootstrap";
+$primary-color: #f7f2f2ea;
+$secondary-color: #2e6bcc;
+$terciary-color: rgb(92, 91, 91);
+$quaternary-color: rgba(155, 219, 248, 0.341);
 
-// $primary-color: #f7f2f2ea;
-// $secondary-color: #2e6bcc;
-// $terciary-color: rgb(92, 91, 91);
+Link,a {
+  text-decoration: none;
+  color: $secondary-color;
+}
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: $primary-color;
+  color: $secondary-color;
+}
+h4,div {
+  color: black;
+}
+p {
+    color: $terciary-color;
+}
+.hide {
+  display: none;
+}
+.counter{
+  display: flex;
+  background-color: #2e6bcc;
+  align-items: center;
+  height: 2vh;
+  border-radius: 7px;
+  margin-right: 0.5vh;
+  color: $primary-color;
+  font-weight: bold;
+}
+.input{
+  border: 1px solid $quaternary-color;
+}
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+.title{
+  color: $secondary-color;
+  font-weight: bold;
+}
+.titleContainer{
+  border-bottom: 1px solid $quaternary-color ;
+  padding-bottom: 1.5vh;
+}
+.error{
+  padding: 2vh;
+}
+.podcastImage{
+  padding-right: 1vh;
+}
+.podcastCard{
+  font-size: 1.5vh;
+}
 
-// body {
-//   font-family: 'Arial', sans-serif;
-//   margin: 0;
-//   padding: 0;
-//   background-color: $primary-color;
-//   color: $secondary-color;
-// }
-// h4,div,p {
-//   color: black;
-//   margin: 0px;
-// }
+
+
 // li > h4,p{
 //   display: flex;
 //   text-align: center;
@@ -32,10 +68,6 @@ $theme-colors: (
 //   margin-top: 5px;
 //   margin-bottom: 8px;
 //   color: $terciary-color
-// }
-// a {
-//   text-decoration: none;
-//   color: $secondary-color;
 // }
 // ul {
 //   display: flex;
@@ -58,13 +90,7 @@ $theme-colors: (
 // p {
 //   word-wrap: break-word;
 // }
-// .hide {
-//   display: none;
-// }
-// .title{
-//   color: $secondary-color;
-//   font-weight: bold;
-// }
+// 
 // .homeTitle{
 //   position: relative;
 //   left: 4%;
@@ -117,13 +143,6 @@ $theme-colors: (
 //   align-items: center;
 // }
 
-// .card {
-//   width: 40%;
-//   margin: 10px;
-//   border-radius: 2px;
-//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-//   font-size: smaller;
-// }
 // .onlychild {
 //   width: 18vh;
 //   margin: 20px;
@@ -135,11 +154,6 @@ $theme-colors: (
 // .filtered-card {
 //   background-color: $secondary-color;
 //   color: $primary-color;
-// }
-// .error{
-//   position: relative;
-//   top: 14vh;
-//   left: 11vh;
 // }
 // // PODCASTDETAIL CLASSES
 // main{

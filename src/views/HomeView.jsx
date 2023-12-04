@@ -63,9 +63,11 @@ const Home = () => {
 
   return (
     <>
-      <Stack gap={2}>
-        <div className="p-2">
+      <Stack gap={3}>
+        <div className="p-3">
           <Title />
+        </div>
+        <div className="d-flex flex-direction-row align-items-center justify-content-end">
           <ListCounter
             error={error}
             filteredPodcastsLength={filteredPodcasts.length}
@@ -74,7 +76,7 @@ const Home = () => {
           />
           <InputFilter setFilterText={setFilterText} setIsFiltered={setIsFiltered} />
         </div>
-        <div className="p-2">
+        <div className="p-3">
           {isFiltered ? (
             <PodcastCardsFiltered filteredPodcasts={filteredPodcasts} />
           ) : (

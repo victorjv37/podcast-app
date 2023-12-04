@@ -8,10 +8,10 @@ const PodcastCards = ({ allPodcasts, isLoaded }) => {
   return (
     <div>
       {isLoaded ? (
-        <Row xs={2} sm={3} md={4} className="g-4">
+        <Row xs={"auto"} lg={4} className="g-4 justify-content-center align-items-center">
           {allPodcasts.map((podcast, index) => (
             <Col key={index}>
-              <Card className="text-center">
+              <Card className="text-center card" style={{ width: "13rem", height: "12.5rem" }}>
                 <Link to={`/podcast/${podcast.id}`}>
                   <Image roundedCircle fluid src={podcast.image} alt={podcast.name} />
                   <Card.Body>

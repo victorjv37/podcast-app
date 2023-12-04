@@ -10,7 +10,13 @@ const InputFilter = ({ setIsFiltered, setFilterText }) => {
 
   return (
     <>
-      <input type="text" placeholder="Filter podcasts..." onChange={handleFilterChange} />
+      <input
+        className="input"
+        style={{ borderRadius: "4px" }}
+        type="text"
+        placeholder="Filter podcasts..."
+        onChange={handleFilterChange}
+      />
     </>
   );
 };

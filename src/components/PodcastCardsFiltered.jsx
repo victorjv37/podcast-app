@@ -1,25 +1,30 @@
 import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import { Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 
 const PodcastCardsFiltered = ({ filteredPodcasts }) => {
   return (
-    <>
-      <ul>
-        {filteredPodcasts &&
-          filteredPodcasts.map((podcast, index) => (
-            <li key={index}>
-              <Link
-                className={filteredPodcasts.length === 1 ? "onlychild" : "card"}
-                key={index}
-                to={`/podcast/${podcast.id}`}
-              >
-                <img src={podcast.image} alt={podcast.name} />
-                <h4>{podcast.name}</h4>
-                <p>{podcast.artist}</p>
-              </Link>
-            </li>
+    <div>
+      {filteredPodcasts && (
+        <Row xs={"auto"} lg={4} className="g-4 justify-content-center align-items-center">
+          {filteredPodcasts.map((podcast, index) => (
+            <Col key={index}>
+              <Card className="text-center card" style={{ width: "13rem", height: "12.5rem" }}>
+                <Link to={`/podcast/${podcast.id}`}>
+                  <Image roundedCircle fluid src={podcast.image} alt={podcast.name} />
+                  <Card.Body>
+                    <Card.Title>{podcast.name}</Card.Title>
+                    <Card.Text>Author: {podcast.artist}</Card.Text>
+                  </Card.Body>
+                </Link>
+              </Card>
+            </Col>
           ))}
-      </ul>
-    </>
+        </Row>
+      )}
+    </div>
   );
 };
 

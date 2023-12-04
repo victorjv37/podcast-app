@@ -1,0 +1,22 @@
+Link, a {
+  text-decoration: none;
+  color: #2e6bcc;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: rgba(247, 242, 242, 0.9176470588);
+  color: #2e6bcc;
+}
+
+h4, div {
+  color: black;
+}
+
+p {
+  color: rgb(92, 91, 91);
+}
+
+.hide {
+  display: none;
+}
