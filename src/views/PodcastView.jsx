@@ -4,6 +4,7 @@ import Title from "../components/Title";
 import PodcastData from "../components/PodcastData";
 import PodcastEpisodes from "../components/PodcastEpisodes";
 import PodcastEpisodesCounter from "../components/PodcastEpisodesCounter";
+import { Stack } from "react-bootstrap";
 
 const PodcastView = () => {
   const [episodesList, setEpisodesList] = useState(null);
@@ -26,6 +27,7 @@ const PodcastView = () => {
         if (storagedEpisodes) {
           const parsedEpisodes = JSON.parse(storagedEpisodes);
           setEpisodesList(parsedEpisodes);
+          setEpisodesCounter(parsedEpisodes.length);
           const lastEpisode = parsedEpisodes[parsedEpisodes.length - 1];
 
           if (lastEpisode) {
@@ -37,6 +39,7 @@ const PodcastView = () => {
 
           if (episodes && episodes.length > 0) {
             setEpisodesList(episodes);
+            setEpisodesCounter(episodes.length);
             const lastEpisodeDescription = episodes[episodes.length - 1].description;
             setDescription(lastEpisodeDescription);
             localStorage.setItem(`podcastEpisodes${id}`, JSON.stringify(episodes));
@@ -52,14 +55,18 @@ const PodcastView = () => {
 
   return (
     <div className="container">
-      <Title />
-      <main>
-        <PodcastData id={id} storagedList={storagedList} description={description} />
+      <Stack gap={3}>
+        <div className="p-3">
+          <Title />
+        </div>
+        <div>
+          <PodcastData id={id} storagedList={storagedList} description={description} />
+        </div>
         <div className="listcounterEpisodes">
           <PodcastEpisodesCounter episodeCounter={episodesCounter} />
           <PodcastEpisodes id={id} episodesList={episodesList} isLoaded={isLoaded} />
         </div>
-      </main>
+      </Stack>
     </div>
   );
 };

@@ -31,14 +31,18 @@ const getPodcastEpisodes = async (id) => {
     const formatTime = (value) => {
       return String(value).padStart(2, "0");
     };
+    const removeHtmlTags = (input) => {
+      const doc = new DOMParser().parseFromString(input, "text/html");
+      return doc.body.textContent || "";
+    };
     results.forEach((episode, index) => {
       const totalSeconds = Math.floor(episode.trackTimeMillis / 1000);
       const hours = Math.floor(totalSeconds / 3600);
       const minutes = Math.floor((totalSeconds % 3600) / 60);
       const seconds = Math.floor(totalSeconds / 60);
-      const formattedDuration = `${hours > 0 ? formatTime(hours) + ":" : ""}
-      ${formatTime(minutes)}:
-      ${formatTime(seconds)}`;
+      const formattedDuration = `${hours > 0 ? formatTime(hours) + "h" + ":" : ""}
+      ${hours > 0 ? formatTime(minutes) + "m" : formatTime(minutes) + "m" + ":"}
+      ${hours > 0 ? "" : formatTime(seconds).slice(0, 2) + "s"}`;
 
       const date = episode.releaseDate.slice(0, 10);
       const invertDate = date.split("-").reverse().join("-");
@@ -50,7 +54,7 @@ const getPodcastEpisodes = async (id) => {
         releaseDate: invertDate,
         duration: formattedDuration,
         episodeUrl: url,
-        episodeDescription: episode.description
+        episodeDescription: removeHtmlTags(episode.description)
       });
     });
     const podcastEpisodes = podcastUnordenedEpisodes.slice(1, podcastUnordenedEpisodes.length);

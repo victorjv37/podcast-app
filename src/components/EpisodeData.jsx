@@ -4,10 +4,12 @@ const EpisodeData = ({ podcastEpisode }) => {
   return (
     <>
       {podcastEpisode && (
-        <div className="episodeData">
-          <AudioPlayer audioSrc={podcastEpisode.episodeUrl} />
-          <h4>{podcastEpisode.title}</h4>
+        <div className="card p-3">
+          <h4>
+            <strong>{podcastEpisode.title}</strong>
+          </h4>
           <p id="episodeP">{podcastEpisode.episodeDescription}</p>
+          <AudioPlayer audioSrc={podcastEpisode.episodeUrl} />
         </div>
       )}
     </>

@@ -2,6 +2,7 @@ import Title from "../components/Title";
 import PodcastData from "../components/PodcastData";
 import EpisodeData from "../components/EpisodeData";
 import { useEffect, useState } from "react";
+import { Stack } from "react-bootstrap";
 
 const EpisodeView = () => {
   const [podcastEpisode, setPodcastEpisode] = useState("");
@@ -29,17 +30,23 @@ const EpisodeView = () => {
 
   return (
     <>
-      <header className="detailHeader">
-        <div className="detailTitle">
-          <Title />
-        </div>
-      </header>
-      <main>
-        <PodcastData storagedList={storagedList} podcastId={podcastId} description={description} />
-        <div className="episodeDataContainer">
-          <EpisodeData podcastEpisode={podcastEpisode} />
-        </div>
-      </main>
+      <div className="container">
+        <Stack gap={3}>
+          <div className="p-3">
+            <Title />
+          </div>
+          <div className="p-3">
+            <PodcastData
+              storagedList={storagedList}
+              podcastId={podcastId}
+              description={description}
+            />
+          </div>
+          <div className="p-3">
+            <EpisodeData podcastEpisode={podcastEpisode} />
+          </div>
+        </Stack>
+      </div>
     </>
   );
 };

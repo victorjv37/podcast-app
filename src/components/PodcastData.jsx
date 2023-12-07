@@ -16,7 +16,7 @@ const PodcastData = ({ id, podcastId, storagedList, description }) => {
   return (
     <>
       {podcastFound && (
-        <Card className="card podcastCard">
+        <Card className={`card podcastCard`}>
           <Link to={`/podcast/${id || podcastId}`}>
             <Card.Body>
               <Image
