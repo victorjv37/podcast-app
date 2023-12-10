@@ -14,9 +14,22 @@ const PodcastCards = ({ allPodcasts, isLoaded }) => {
               <Card className="text-center card" style={{ width: "13rem", height: "12.5rem" }}>
                 <Link to={`/podcast/${podcast.id}`}>
                   <Image roundedCircle fluid src={podcast.image} alt={podcast.name} />
-                  <Card.Body>
-                    <Card.Title>{podcast.name}</Card.Title>
-                    <Card.Text>Author: {podcast.artist}</Card.Text>
+                  <Card.Body className="pt-0">
+                    <Card.Title
+                      style={{
+                        fontSize: "1rem",
+                        marginBottom: "1vh",
+                        maxHeight: "2.36rem",
+                        overflow: "hidden"
+                      }}
+                    >
+                      {podcast.name}
+                    </Card.Title>
+                    <Card.Text
+                      style={{ fontSize: "0.8rem", maxHeight: "1.15rem", overflow: "hidden" }}
+                    >
+                      Author: {podcast.artist}
+                    </Card.Text>
                   </Card.Body>
                 </Link>
               </Card>

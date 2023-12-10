@@ -54,18 +54,20 @@ const PodcastView = () => {
   }, [id]);
 
   return (
-    <div className="container">
-      <Stack gap={3}>
+    <div className="container" style={{ overflow: "hidden", maxHeight: "100vh" }}>
+      <Stack gap={2}>
         <div className="p-3">
           <Title />
         </div>
-        <div>
-          <PodcastData id={id} storagedList={storagedList} description={description} />
-        </div>
-        <div className="listcounterEpisodes">
-          <PodcastEpisodesCounter episodeCounter={episodesCounter} />
-          <PodcastEpisodes id={id} episodesList={episodesList} isLoaded={isLoaded} />
-        </div>
+        <Stack gap={2} className="row">
+          <div className="podcastDataContainer">
+            <PodcastData id={id} storagedList={storagedList} description={description} />
+          </div>
+          <div className="listcounterEpisodes">
+            <PodcastEpisodesCounter episodeCounter={episodesCounter} />
+            <PodcastEpisodes id={id} episodesList={episodesList} isLoaded={isLoaded} />
+          </div>
+        </Stack>
       </Stack>
     </div>
   );

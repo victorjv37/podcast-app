@@ -31,19 +31,23 @@ const EpisodeView = () => {
   return (
     <>
       <div className="container">
-        <Stack gap={3}>
+        <Stack gap={2}>
           <div className="p-3">
             <Title />
           </div>
           <div className="p-3">
-            <PodcastData
-              storagedList={storagedList}
-              podcastId={podcastId}
-              description={description}
-            />
-          </div>
-          <div className="p-3">
-            <EpisodeData podcastEpisode={podcastEpisode} />
+            <Stack gap={2}>
+              <div className="p-3">
+                <PodcastData
+                  storagedList={storagedList}
+                  podcastId={podcastId}
+                  description={description}
+                />
+              </div>
+              <div className="p-3">
+                <EpisodeData podcastEpisode={podcastEpisode} />
+              </div>
+            </Stack>
           </div>
         </Stack>
       </div>

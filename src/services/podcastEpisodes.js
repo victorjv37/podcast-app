@@ -4,6 +4,10 @@ import X2JS from "x2js";
 const getPodcastEpisodes = async (id) => {
   const podcastUnordenedEpisodes = [];
 
+  const removeHtmlTags = (input) => {
+    const doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.body.textContent || "";
+  };
   const conversionX2JS = async (feedUrl) => {
     try {
       const xmlResponse = await axios.get(feedUrl);
@@ -12,7 +16,7 @@ const getPodcastEpisodes = async (id) => {
       let x2js = new X2JS();
       const result = x2js.xml2js(xmlData);
 
-      const descriptionPromise = result.rss.channel.description;
+      const descriptionPromise = removeHtmlTags(result.rss.channel.description);
       const description = await descriptionPromise;
 
       return description;
@@ -30,10 +34,6 @@ const getPodcastEpisodes = async (id) => {
     const description = { description: await conversionX2JS(feedUrl) };
     const formatTime = (value) => {
       return String(value).padStart(2, "0");
-    };
-    const removeHtmlTags = (input) => {
-      const doc = new DOMParser().parseFromString(input, "text/html");
-      return doc.body.textContent || "";
     };
     results.forEach((episode, index) => {
       const totalSeconds = Math.floor(episode.trackTimeMillis / 1000);
@@ -54,7 +54,7 @@ const getPodcastEpisodes = async (id) => {
         releaseDate: invertDate,
         duration: formattedDuration,
         episodeUrl: url,
-        episodeDescription: removeHtmlTags(episode.description)
+        episodeDescription: episode.description
       });
     });
     const podcastEpisodes = podcastUnordenedEpisodes.slice(1, podcastUnordenedEpisodes.length);

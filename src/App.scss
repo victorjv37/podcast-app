@@ -53,7 +53,7 @@ p {
   margin-right: 1vh;
 }
 .podcastCard{
-  font-size: 1rem;
+  font-size: 0.7rem;
   border-radius: 2px;
 }
 .episodeCard{
@@ -64,7 +64,7 @@ p {
   display: flex;
   justify-content: center;
   overflow: auto;
-  height: 49vh;
+  max-height: 44vh;
   position: relative;
 }
 .episodeCard::-webkit-scrollbar{
@@ -75,7 +75,7 @@ table {
   border-right: none;
   width: 95%;
   justify-content: center;
-  font-size: 1.5vh;
+  font-size: 0.65rem;
   overflow-y: hidden;
 }
 tbody {
@@ -110,6 +110,44 @@ tr:nth-child(even){
 }
 
 
+@media (min-width: 650px) {
+  .container{
+    flex-direction: row;
+  }
+  .podcastData{
+    width: 100%;
+    font-size: 1rem;
+  }
+  .podcastImage{
+    margin-bottom: 0.5rem;
+    width: 100%;
+    border-radius: 2px;
+  }
+  .card-title{ 
+    border-top:1px solid $quaternary-color;
+    padding-top: 1rem;
+    align-content: flex-start;
+  }
+  .card-body{
+    display: flex;
+    flex-direction: column;
+    float: none;
+  }
+  .podcastDataContainer{
+    width: 30%;
+  }
+  .row{ 
+    flex-direction: row;
+    margin: 0px;
+    flex-wrap: nowrap;
+  }
+  .listcounterEpisodes{
+    flex-direction: column;
+    padding: 5%;
+    height: 100%;
+    flex-shrink: 0;
+  }
+}
 
 // li > h4,p{
   //   display: flex;
@@ -316,45 +354,6 @@ tr:nth-child(even){
 // @media (min-width: 500px) {
 //   .card {
 //     width: 18vh;
-//   }
-// }
-// @media (min-width: 650px) {
-//   .podcastData {
-//     display: flex;
-//     align-items: center;
-//     width: 35vh;
-//     height: 50%;
-//     flex-direction: column;
-//     margin-top: 3%;
-//     margin-left: 6vh;
-//   }
-//   .tableContainer{
-//     max-height: 85vh;
-//     width: 100%;
-//   }
-//   .episodeDataContainer{
-//     margin-top: 3%;
-//   }
-//   main{
-//   display: flex;
-//   flex-direction: row;
-//   width: 100%;
-//   height: 100%;
-//   }
-//   .listcounterEpisodes{
-//     padding: 5%;
-//     height: 90%;
-//     width: 100%;
-//     margin-top: -2%;
-//   }
-//   .episodeDataContainer {
-//     justify-content: center;
-//   }
-//   .episodeData {
-//     justify-content: center;
-//   }
-//   audio{
-//     padding-left: 0px;
 //   }
 // }
 // @media (max-width: 256px) {
