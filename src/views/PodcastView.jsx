@@ -54,12 +54,12 @@ const PodcastView = () => {
   }, [id]);
 
   return (
-    <div className="container" style={{ overflow: "hidden", maxHeight: "100vh" }}>
+    <div className="container podcastContainer" style={{ overflow: "hidden", maxHeight: "100vh" }}>
       <Stack gap={2}>
         <div className="p-3">
           <Title />
         </div>
-        <Stack gap={2} className="row">
+        <Stack gap={2} className="row noWrap">
           <div className="podcastDataContainer">
             <PodcastData id={id} storagedList={storagedList} description={description} />
           </div>

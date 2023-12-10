@@ -1,6 +1,15 @@
-import AudioPlayer from "./AudioPlayer";
+import Player from "@madzadev/audio-player";
+import "@madzadev/audio-player/dist/index.css";
 
 const EpisodeData = ({ podcastEpisode }) => {
+  const track = [
+    {
+      url: podcastEpisode.episodeUrl,
+      title: "",
+      tags: [""]
+    }
+  ];
+
   return (
     <>
       {podcastEpisode && (
@@ -9,7 +18,9 @@ const EpisodeData = ({ podcastEpisode }) => {
             <strong>{podcastEpisode.title}</strong>
           </h4>
           <p id="episodeP">{podcastEpisode.episodeDescription}</p>
-          <AudioPlayer audioSrc={podcastEpisode.episodeUrl} />
+          <div className="container">
+            <Player trackList={track} />
+          </div>
         </div>
       )}
     </>

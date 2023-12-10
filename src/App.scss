@@ -51,9 +51,10 @@ p {
 }
 .podcastImage{
   margin-right: 1vh;
+  float: left;
 }
 .podcastCard{
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   border-radius: 2px;
 }
 .episodeCard{
@@ -70,12 +71,30 @@ p {
 .episodeCard::-webkit-scrollbar{
   display: none;
 }
+.episodesCounter{
+  font-size: 1rem;
+}
+.cardTitle, .cardDescription{
+  color: black;
+  font-weight: bold;
+  text-align: start;
+  width: 100%;
+}
+.cardDescription{
+  font-size: 1rem;
+}
+.startText{
+  padding-left: 0px;
+}
+#plText{
+  padding-left: 1vh;
+}
 table {
   border-left: none;
   border-right: none;
   width: 95%;
   justify-content: center;
-  font-size: 0.65rem;
+  font-size: 0.9rem;
   overflow-y: hidden;
 }
 tbody {
@@ -98,20 +117,23 @@ th:nth-child(3){
   text-align: center;
 }
 td:nth-child(2){
-  min-width: 81px;
+  min-width: 90px;
   justify-content: space-between;
 }
 td:nth-child(3){
-  text-align: center;
-  min-width: 69px;
+  text-align: end;
+  min-width: 76px;
 }
 tr:nth-child(even){
   background-color: rgba(67, 120, 172, 0.092);
 }
+.audio-player{
+  background-color: black;
+  color: #ffffff;
+}
 
-
-@media (min-width: 650px) {
-  .container{
+@media (min-width: 768px) {
+  .podcastContainer{
     flex-direction: row;
   }
   .podcastData{
@@ -120,7 +142,10 @@ tr:nth-child(even){
   }
   .podcastImage{
     margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
     width: 100%;
+    max-width: 18vh;
     border-radius: 2px;
   }
   .card-title{ 
@@ -131,24 +156,63 @@ tr:nth-child(even){
   .card-body{
     display: flex;
     flex-direction: column;
-    float: none;
+    align-items: center;
   }
   .podcastDataContainer{
     width: 30%;
   }
+  .episodeViewDataContainer{
+    width: 30%;
+  }
+  .episodeContainer{
+    width: 75%;
+  }
   .row{ 
     flex-direction: row;
     margin: 0px;
+  }
+  .noWrap{
     flex-wrap: nowrap;
   }
   .listcounterEpisodes{
     flex-direction: column;
-    padding: 5%;
+    padding-bottom: 5%;
+    padding-right: 5%;
     height: 100%;
+    width: 75%;
     flex-shrink: 0;
+  }
+  .episodeCard{
+    max-height: 80vh;
+  }
+  .episodesCounter{
+    font-size: 1.5rem;
+  }
+  .card-text{
+    overflow-y: scroll;
+    max-height: 43vh ;
+  }
+  .card-text::-webkit-scrollbar{
+    display: none;
+  }
+  #p{
+    height: 100%;
+  }
+  .startText{
+    align-items: start;
+  }
+  table {
+    font-size: 1rem;
+  }
+  td:nth-child(2){
+    min-width: 98px;
+  }
+  td:nth-child(3){
+    min-width: 83px;
   }
 }
 
+// 350
 // li > h4,p{
   //   display: flex;
   //   text-align: center;

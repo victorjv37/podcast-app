@@ -36,15 +36,15 @@ const EpisodeView = () => {
             <Title />
           </div>
           <div className="p-3">
-            <Stack gap={2}>
-              <div className="p-3">
+            <Stack gap={2} className="row noWrap">
+              <div className="episodeViewDataContainer">
                 <PodcastData
                   storagedList={storagedList}
                   podcastId={podcastId}
                   description={description}
                 />
               </div>
-              <div className="p-3">
+              <div className="p-3 pt-0 episodeContainer">
                 <EpisodeData podcastEpisode={podcastEpisode} />
               </div>
             </Stack>

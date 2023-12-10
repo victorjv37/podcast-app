@@ -20,20 +20,23 @@ const PodcastData = ({ id, podcastId, storagedList, description }) => {
           <Link to={`/podcast/${id || podcastId}`}>
             <Card.Body>
               <Image
-                style={{ float: "left" }}
                 rounded
                 className="podcastImage"
                 src={podcastFound.image}
                 alt={podcastFound.name}
               />
-              <Card.Title>{podcastFound.name}</Card.Title>
-              <Card.Text>by: {podcastFound.artist}</Card.Text>
-              <Card.Title>Description:</Card.Title>
-              <Card.Text>
-                {description && (
-                  <p id={description.length < 160 ? "shorterP" : "p"}>{description}</p>
-                )}
-              </Card.Text>
+              <Card.Body className="startText">
+                <Card.Title id="plText" className="cardTitle">
+                  {podcastFound.name}
+                </Card.Title>
+                <Card.Text id="plText">by: {podcastFound.artist}</Card.Text>
+                <Card.Title className="cardDescription">Description:</Card.Title>
+                <Card.Text>
+                  {description && (
+                    <p id={description.length < 160 ? "shorterP" : "p"}>{description}</p>
+                  )}
+                </Card.Text>
+              </Card.Body>
             </Card.Body>
           </Link>
         </Card>
