@@ -11,9 +11,15 @@ const PodcastCards = ({ allPodcasts, isLoaded }) => {
         <Row xs={"auto"} lg={4} className="g-4 justify-content-center align-items-center">
           {allPodcasts.map((podcast, index) => (
             <Col key={index}>
-              <Card className="text-center card" style={{ width: "13rem", height: "12.5rem" }}>
+              <Card className="text-center card mb-5" style={{ width: "13rem", height: "9rem" }}>
                 <Link to={`/podcast/${podcast.id}`}>
-                  <Image roundedCircle fluid src={podcast.image} alt={podcast.name} />
+                  <Image
+                    roundedCircle
+                    fluid
+                    style={{ marginTop: "-5vh" }}
+                    src={podcast.image}
+                    alt={podcast.name}
+                  />
                   <Card.Body className="pt-0">
                     <Card.Title
                       style={{

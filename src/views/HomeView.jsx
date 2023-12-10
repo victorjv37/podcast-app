@@ -67,7 +67,7 @@ const Home = () => {
         <div className="p-3">
           <Title />
         </div>
-        <div className="d-flex flex-direction-row align-items-center justify-content-end">
+        <div className="d-flex flex-direction-row align-items-center justify-content-end mb-5">
           <ListCounter
             error={error}
             filteredPodcastsLength={filteredPodcasts.length}
