@@ -5,12 +5,12 @@ const ListCounter = ({ error, filteredPodcastsLength, allPodcastsLength, isfilte
     <>
       {isfiltered ? (
         error ? (
-          <div className="error">Unmatching Data...</div>
+          <div className="error counter">Unmatching Data...</div>
         ) : (
-          <div>{filteredPodcastsLength}</div>
+          <div className="counter">{filteredPodcastsLength}</div>
         )
       ) : (
-        <div>{allPodcastsLength}</div>
+        <div className="counter">{allPodcastsLength}</div>
       )}
     </>
   );

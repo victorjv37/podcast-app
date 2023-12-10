@@ -1,10 +1,11 @@
-import InputFilter from "./InputFilter";
-import ListCounter from "./ListCounter";
-import PodcastCards from "./PodcastCards";
-import PodcastCardsFiltered from "./PodcastCardsFiltered";
-import Title from "./Title";
-import podcastList from "../services/podcastList";
+import InputFilter from "../components/InputFilter";
+import ListCounter from "../components/ListCounter";
+import PodcastCards from "../components/PodcastCards";
+import PodcastCardsFiltered from "../components/PodcastCardsFiltered";
+import Title from "../components/Title";
+import getPodcastList from "../services/getPodcastList";
 import { useState, useEffect } from "react";
+import { Stack } from "react-bootstrap";
 
 const Home = () => {
   const [allPodcasts, setAllPodcasts] = useState([]);
@@ -17,26 +18,24 @@ const Home = () => {
   let storagedList = localStorage.getItem("podcastList");
 
   useEffect(() => {
-    (async () => {
-      if (storagedList) {
+    const fetchData = async () => {
+      if (!storagedList) {
+        const podcasts = await getPodcastList();
+        setAllPodcasts(podcasts);
+        setFilteredPodcasts(podcasts);
+        setIsLoaded(true);
+      } else {
         setAllPodcasts(JSON.parse(storagedList));
         setFilteredPodcasts(JSON.parse(storagedList));
         setIsLoaded(true);
-      } else {
-        try {
-          await new Promise((resolve) => setTimeout(resolve, 500));
-          setAllPodcasts(podcastList);
-          setFilteredPodcasts(podcastList);
-          setIsLoaded(true);
-        } catch (error) {
-          console.log("Error bringing data to the component", error);
-        }
       }
-    })();
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
-    const podcastFilteredArray = podcastList.filter((element) => {
+    const podcastFilteredArray = allPodcasts.filter((element) => {
       let elementName = element.name;
       let authorName = element.artist;
 
@@ -64,11 +63,11 @@ const Home = () => {
 
   return (
     <>
-      <header className="homeHeader">
-        <div className="homeTitle">
+      <Stack gap={3}>
+        <div className="p-3">
           <Title />
         </div>
-        <div className="input-listcounter">
+        <div className="d-flex flex-direction-row align-items-center justify-content-end mb-5">
           <ListCounter
             error={error}
             filteredPodcastsLength={filteredPodcasts.length}
@@ -77,14 +76,14 @@ const Home = () => {
           />
           <InputFilter setFilterText={setFilterText} setIsFiltered={setIsFiltered} />
         </div>
-      </header>
-      <>
-        {isFiltered ? (
-          <PodcastCardsFiltered filteredPodcasts={filteredPodcasts} />
-        ) : (
-          <PodcastCards allPodcasts={allPodcasts} isLoaded={isLoaded} />
-        )}
-      </>
+        <div className="p-3">
+          {isFiltered ? (
+            <PodcastCardsFiltered filteredPodcasts={filteredPodcasts} />
+          ) : (
+            <PodcastCards allPodcasts={allPodcasts} isLoaded={isLoaded} />
+          )}
+        </div>
+      </Stack>
     </>
   );
 };

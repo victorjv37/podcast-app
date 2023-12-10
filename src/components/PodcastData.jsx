@@ -1,27 +1,45 @@
 import { useEffect, useState } from "react";
-import podcastList from "../services/podcastList.js";
+import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import { Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 
-const PodcastData = ({ id, podcastId }) => {
+const PodcastData = ({ id, podcastId, storagedList, description }) => {
   const [podcastFound, setPodcastFound] = useState("");
+
   useEffect(() => {
-    const podcast = podcastList.find((podcast) => podcast.id === id || podcast.id === podcastId);
+    const podcast = storagedList.find((podcast) => podcast.id === id || podcast.id === podcastId);
     setPodcastFound(podcast);
-  }, [id, podcastId, podcastList]);
+  }, [id, podcastId]);
 
   return (
     <>
       {podcastFound && (
-        <div className="podcastData">
-          <img src={podcastFound.image}></img>
-          <div className="podcastTitleDescription">
-            <h4>{podcastFound.name}</h4>
-            <p>by {podcastFound.artist}</p>
-            <br />
-            <br />
-            <h4>Description:</h4>
-            <p>{podcastFound.description.label}</p>
-          </div>
-        </div>
+        <Card className="card podcastCard podcastData">
+          <Link to={`/podcast/${id || podcastId}`}>
+            <Card.Body>
+              <Image
+                rounded
+                className="podcastImage"
+                src={podcastFound.image}
+                alt={podcastFound.name}
+              />
+              <Card.Body className="startText">
+                <Card.Title id="plText" className="cardTitle">
+                  {podcastFound.name}
+                </Card.Title>
+                <Card.Text id="plText">by: {podcastFound.artist}</Card.Text>
+                <Card.Title className="cardDescription">Description:</Card.Title>
+                <Card.Text>
+                  {description && (
+                    <p id={description.length < 160 ? "shorterP" : "p"}>{description}</p>
+                  )}
+                </Card.Text>
+              </Card.Body>
+            </Card.Body>
+          </Link>
+        </Card>
       )}
     </>
   );

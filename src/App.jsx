@@ -1,10 +1,9 @@
-import "./App.scss";
-import Home from "./components/Home";
+import HomeView from "./views/HomeView";
 
 const App = () => {
   return (
-    <div className="home-container">
-      <Home />
+    <div className="container">
+      <HomeView />
     </div>
   );
 };

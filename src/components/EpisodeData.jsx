@@ -1,13 +1,15 @@
-const EpisodeData = ({ podcastFound }) => {
+import AudioPlayer from "./AudioPlayer";
+
+const EpisodeData = ({ podcastEpisode }) => {
   return (
     <>
-      {podcastFound && (
-        <div>
-          <h4>{podcastFound[0].title}</h4>
-          <p>{podcastFound[0].episodeDescription}</p>
-          <audio controls>
-            <source src={podcastFound[0].episodeUrl} type="audio/mp3" />
-          </audio>
+      {podcastEpisode && (
+        <div className="card p-3">
+          <h4>
+            <strong>{podcastEpisode.title}</strong>
+          </h4>
+          <p id="episodeP">{podcastEpisode.episodeDescription}</p>
+          <AudioPlayer audioSrc={podcastEpisode.episodeUrl} />
         </div>
       )}
     </>

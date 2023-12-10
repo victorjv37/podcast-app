@@ -1,13 +1,37 @@
 import axios from "axios";
+import X2JS from "x2js";
 
 const getPodcastEpisodes = async (id) => {
   const podcastUnordenedEpisodes = [];
+
+  const removeHtmlTags = (input) => {
+    const doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.body.textContent || "";
+  };
+  const conversionX2JS = async (feedUrl) => {
+    try {
+      const xmlResponse = await axios.get(feedUrl);
+      const xmlData = xmlResponse.data;
+
+      let x2js = new X2JS();
+      const result = x2js.xml2js(xmlData);
+
+      const descriptionPromise = removeHtmlTags(result.rss.channel.description);
+      const description = await descriptionPromise;
+
+      return description;
+    } catch (error) {
+      console.error("Error fetching XML:", error);
+    }
+  };
+
   try {
     const response = await axios.get(
       `https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode&limit=201`
     );
     const results = response.data.results;
-    // console.log(results);
+    const feedUrl = results[0].feedUrl;
+    const description = { description: await conversionX2JS(feedUrl) };
     const formatTime = (value) => {
       return String(value).padStart(2, "0");
     };
@@ -16,9 +40,9 @@ const getPodcastEpisodes = async (id) => {
       const hours = Math.floor(totalSeconds / 3600);
       const minutes = Math.floor((totalSeconds % 3600) / 60);
       const seconds = Math.floor(totalSeconds / 60);
-      const formattedDuration = `${hours > 0 ? formatTime(hours) + ":" : ""}
-      ${formatTime(minutes)}:
-      ${formatTime(seconds)}`;
+      const formattedDuration = `${hours > 0 ? formatTime(hours) + "h" + ":" : ""}
+      ${hours > 0 ? formatTime(minutes) + "m" : formatTime(minutes) + "m" + ":"}
+      ${hours > 0 ? "" : formatTime(seconds).slice(0, 2) + "s"}`;
 
       const date = episode.releaseDate.slice(0, 10);
       const invertDate = date.split("-").reverse().join("-");
@@ -30,12 +54,11 @@ const getPodcastEpisodes = async (id) => {
         releaseDate: invertDate,
         duration: formattedDuration,
         episodeUrl: url,
-        episodeDescription: episode.shortDescription
+        episodeDescription: episode.description
       });
     });
-    const podcastEpisodes = podcastUnordenedEpisodes
-      .slice(1, podcastUnordenedEpisodes.length)
-      .reverse();
+    const podcastEpisodes = podcastUnordenedEpisodes.slice(1, podcastUnordenedEpisodes.length);
+    podcastEpisodes.push(description);
     const setListInLocalStorage = (id) =>
       localStorage.setItem(`podcastEpisodes${id}`, JSON.stringify(podcastEpisodes));
     setListInLocalStorage(id);

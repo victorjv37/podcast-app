@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
+import { Table } from "react-bootstrap";
 
 const PodcastEpisodes = ({ episodesList, isLoaded, id }) => {
   return (
     <>
       {isLoaded ? (
         episodesList && (
-          <div className="tableContainer">
-            <table>
+          <div className="episodeCard">
+            <Table className="br-3" rounded striped style={{ width: "95%" }}>
               <thead>
                 <tr>
                   <th>Title</th>
@@ -25,7 +26,7 @@ const PodcastEpisodes = ({ episodesList, isLoaded, id }) => {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </Table>
           </div>
         )
       ) : (

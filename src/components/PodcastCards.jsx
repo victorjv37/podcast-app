@@ -1,22 +1,47 @@
 import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import { Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 
 const PodcastCards = ({ allPodcasts, isLoaded }) => {
   return (
     <div>
       {isLoaded ? (
-        <>
-          <ul>
-            {allPodcasts.map((podcast, index) => (
-              <Link className="card" key={index} to={`/podcast/${podcast.id}`}>
-                <li key={index}>
-                  <img src={podcast.image} alt={podcast.name} />
-                  <h4>{podcast.name}</h4>
-                  <p>Author: {podcast.artist}</p>
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </>
+        <Row xs={"auto"} lg={4} className="g-4 justify-content-center align-items-center">
+          {allPodcasts.map((podcast, index) => (
+            <Col key={index}>
+              <Card className="text-center card mb-5" style={{ width: "13rem", height: "9rem" }}>
+                <Link to={`/podcast/${podcast.id}`}>
+                  <Image
+                    roundedCircle
+                    fluid
+                    style={{ marginTop: "-5vh" }}
+                    src={podcast.image}
+                    alt={podcast.name}
+                  />
+                  <Card.Body className="pt-0">
+                    <Card.Title
+                      style={{
+                        fontSize: "1rem",
+                        marginBottom: "1vh",
+                        maxHeight: "2.36rem",
+                        overflow: "hidden"
+                      }}
+                    >
+                      {podcast.name}
+                    </Card.Title>
+                    <Card.Text
+                      style={{ fontSize: "0.8rem", maxHeight: "1.15rem", overflow: "hidden" }}
+                    >
+                      Author: {podcast.artist}
+                    </Card.Text>
+                  </Card.Body>
+                </Link>
+              </Card>
+            </Col>
+          ))}
+        </Row>
       ) : (
         <div>Loading...</div>
       )}
