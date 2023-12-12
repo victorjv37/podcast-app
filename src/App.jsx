@@ -1,21 +1,11 @@
-import './App.css'
-import PodcastCards from './components/PodcastCards'
-import Header from './components/Header'
-import PodcastCardsFiltered from './components/PodcastCardsFiltered'
-import { useState } from 'react'
+import HomeView from "./views/HomeView";
 
-function App() {
-  const [filtered, setFiltered] = useState(false)
-
+const App = () => {
   return (
-    <>
-      <Header setFiltered={setFiltered}/>
-      {filtered ?
-      <PodcastCardsFiltered /> :
-      <PodcastCards />
-      }
-    </>
-  )
-}
+    <div className="container">
+      <HomeView />
+    </div>
+  );
+};
 
-export default App
+export default App;

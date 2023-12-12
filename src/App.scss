@@ -1,0 +1,220 @@
+
+$primary-color: #ffffff;
+$secondary-color: #2e6bcc;
+$terciary-color: rgb(92, 91, 91);
+$quaternary-color: rgba(155, 219, 248, 0.341);
+
+Link,a {
+  text-decoration: none;
+  color: $secondary-color;
+}
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: $primary-color;
+  color: $secondary-color;
+}
+h4,div {
+  color: black;
+}
+p {
+  color: $terciary-color;
+}
+.hide {
+  display: none;
+}
+.counter{
+  display: flex;
+  background-color: #2e6bcc;
+  align-items: center;
+  height: 2.5vh;
+  border-radius: 7px;
+  margin-right: 0.5vh;
+  color: $primary-color;
+  font-weight: bold;
+}
+.input{
+  border: 1px solid $quaternary-color;
+}
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+.title{
+  color: $secondary-color;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+.titleContainer{
+  border-bottom: 1px solid $quaternary-color ;
+  padding-bottom: 1.5vh;
+}
+.error{
+  padding: 2vh;
+}
+.podcastImage{
+  margin-right: 1vh;
+  float: left;
+}
+.podcastCard{
+  font-size: 0.9rem;
+  border-radius: 2px;
+}
+.episodeCard{
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+  max-height: 44vh;
+  position: relative;
+}
+.episodeCard::-webkit-scrollbar{
+  display: none;
+}
+.episodesCounter{
+  font-size: 1rem;
+}
+.cardTitle, .cardDescription{
+  color: black;
+  font-weight: bold;
+  text-align: start;
+  width: 100%;
+}
+.cardDescription{
+  font-size: 1rem;
+}
+.startText{
+  padding-left: 0px;
+}
+#plText{
+  padding-left: 1vh;
+}
+table {
+  border-left: none;
+  border-right: none;
+  width: 95%;
+  justify-content: center;
+  font-size: 0.9rem;
+  overflow-y: hidden;
+}
+tbody {
+  top: 0;
+  overflow-y: scroll;
+  max-height: 100%;
+}
+th {
+  z-index: 1;
+  background-color: $primary-color;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  padding-top: 1vh;
+}
+th > tr{
+  position: sticky;
+}
+th:nth-child(3){
+  text-align: center;
+}
+td:nth-child(2){
+  min-width: 90px;
+  justify-content: space-between;
+}
+td:nth-child(3){
+  text-align: end;
+  min-width: 79px;
+}
+tr:nth-child(even){
+  background-color: rgba(67, 120, 172, 0.092);
+}
+audio{
+  height: 20px;
+  width: 100%;
+  border-radius: 1px ;
+}
+
+@media (min-width: 768px) {
+  .podcastContainer{
+    flex-direction: row;
+  }
+  .podcastData{
+    width: 100%;
+    font-size: 1rem;
+  }
+  .podcastImage{
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 18vh;
+    border-radius: 2px;
+  }
+  .card-title{ 
+    border-top:1px solid $quaternary-color;
+    padding-top: 1rem;
+    align-content: flex-start;
+  }
+  .card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .podcastDataContainer{
+    width: 30%;
+  }
+  .episodeViewDataContainer{
+    width: 30%;
+  }
+  .episodeContainer{
+    width: 75%;
+  }
+  .row{ 
+    flex-direction: row;
+    margin: 0px;
+  }
+  .noWrap{
+    flex-wrap: nowrap;
+  }
+  .listcounterEpisodes{
+    flex-direction: column;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    height: 100%;
+    width: 75%;
+    flex-shrink: 0;
+  }
+  .episodeCard{
+    max-height: 80vh;
+  }
+  .episodesCounter{
+    font-size: 1.5rem;
+  }
+  .card-text{
+    overflow-y: scroll;
+    max-height: 43vh ;
+  }
+  .card-text::-webkit-scrollbar{
+    display: none;
+  }
+  #p{
+    height: 100%;
+  }
+  .startText{
+    align-items: start;
+  }
+  table {
+    font-size: 1rem;
+  }
+  td:nth-child(2){
+    min-width: 98px;
+  }
+  td:nth-child(3){
+    min-width: 83px;
+  }
+}
+@media (max-width: 356px) {
+  .input-listcounter {
+    right: 7vh;
+  }
+}
